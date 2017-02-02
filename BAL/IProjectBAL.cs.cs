@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BAL
 {
-    public interface IGitIntegrationBAL
+    public interface IProjectBAL
     {
         CreateProjectResponse CreateProject(CreateProjectRequest request);
     }

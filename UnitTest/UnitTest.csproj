@@ -52,7 +52,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BAL\GitIntegrationBALTest.cs" />
+    <Compile Include="BAL\ProjectBALTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Choose>

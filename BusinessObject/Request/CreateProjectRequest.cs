@@ -8,5 +8,10 @@ namespace BusinessObject.Request
 {
     public class CreateProjectRequest
     {
+        public string ProjectName;
+
+        //TODO Add Database configuration
+
+        //TODO 
     }
 }

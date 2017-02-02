@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace BAL
 {
-    public class GitIntegrationBAL : IGitIntegrationBAL
+    public class ProjectBAL : IProjectBAL
     {
         public CreateProjectResponse CreateProject(CreateProjectRequest request)
         {
             CreateProjectResponse response = new CreateProjectResponse();
 
+            //TODO Create Repo
 
             return response;
         }

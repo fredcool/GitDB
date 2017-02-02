@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTest.BAL
 {
     [TestClass]
-    public class GitIntegrationBALTest
+    public class ProjectBALTest
     {
         [TestMethod]
         public void TestMethod1()
