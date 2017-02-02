@@ -9,6 +9,7 @@ namespace UnitTest.BAL
         [TestMethod]
         public void TestMethod1()
         {
+
         }
     }
 }
