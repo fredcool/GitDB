@@ -1,16 +1,17 @@
-var webpack = require('webpack');  
-module.exports = {  
+const webpack = require('webpack'); 
+
+module.exports = {
+    // decided to do a single page app so we have only 1 entry
     entry: [
-      'webpack/hot/only-dev-server',
-      "./app/js/app.js"
+      './app/js/app.js'
     ],
     output: {
         path: __dirname + '/build',
-        filename: "bundle.js"
+        filename: 'bundle.js'
     },
     module: {
         loaders: [
-            { test: /\.jsx?$/,
+            { test: /\.js?$/,
               loader: 'babel-loader',
               exclude: /node_modules/,
               query:
