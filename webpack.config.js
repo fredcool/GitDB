@@ -3,7 +3,7 @@ const webpack = require('webpack');
 module.exports = {
     // decided to do a single page app so we have only 1 entry
     entry: [
-      './app/js/app.js'
+      './src/GitDB/wwwroot/js/app.js'
     ],
     output: {
         path: __dirname + '/build',
