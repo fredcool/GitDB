@@ -10,7 +10,7 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-        loaders: [
+        rules: [
             { test: /\.js?$/,
               loader: 'babel-loader',
               exclude: /node_modules/,
@@ -19,11 +19,25 @@ module.exports = {
                 presets:['es2015', 'react']
               }
             },
-            { test: /\.css$/, loader: "style!css" }
+            { test: /\.css$/,
+              use: [ 'style-loader', 'css-loader' ]
+            },
+            { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,   loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+            { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,   loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+            { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,    loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
+            { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,    loader: "file-loader" },
+            { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,    loader: "url-loader?limit=10000&mimetype=image/svg+xml" },
+            { test: /\.json$/, loader: 'json-loader' }
         ]
     },
     plugins: [
       new webpack.NoEmitOnErrorsPlugin()
-    ]
+    ],
+    node: {
+      console: true,
+      fs: 'empty',
+      net: 'empty',
+      tls: 'empty'
+    }
 
 };
