@@ -32,13 +32,25 @@ export default class ProjTable extends React.Component {
 				rowsCount={dataList.getSize()}
 				rowHeight={50}
 				headerHeight={50}
-				width={1000}
+				width={940}
 				height={500}>
 				<Column
 					header={<Cell>Project Name</Cell>}
-					cell={<LinkCell data={dataList} col="firstName" />}
+					cell={<LinkCell data={dataList} col="companyName" />}
 					fixed={true}
-					width={100}
+					width={280}
+				/>
+				<Column
+					header={<Cell>Database</Cell>}
+					cell={<LinkCell data={dataList} col="dbname" />}
+					fixed={true}
+					width={260}
+				/>
+				<Column
+					header={<Cell>GitHub URL</Cell>}
+					cell={<LinkCell data={dataList} col="url" />}
+					fixed={true}
+					width={400}
 				/>
 			</Table>
 		);
