@@ -1,18 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'react-bootstrap';
-import Header from './header';
-import ProjTable from './projtable';
+import Header from './Header';
+import ProjTable from './ProjTable';
+import NewProjModal from './NewProjModal';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
+
   render() {
     return (
       <div className="">
         <Header />
         <br/>
-        <Button bsStyle="primary">New Project</Button>
+        <NewProjModal />
         <br/>
         <div>
             <ProjTable />
@@ -20,6 +22,8 @@ class App extends React.Component {
       </div>
     );
   }
+
+
 }
 
 ReactDOM.render(
