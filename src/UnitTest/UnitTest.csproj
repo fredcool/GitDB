@@ -53,7 +53,22 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BAL\ProjectBALTest.cs" />
+    <Compile Include="BAL\DbBALTest.cs" />
+    <Compile Include="BAL\UserBALTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BAL\BAL.csproj">
+      <Project>{5cb3fb36-76b9-41f8-85b7-c97856d66306}</Project>
+      <Name>BAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessObject\BusinessObject.csproj">
+      <Project>{6a2163f6-5df5-484c-85cb-3953f02df749}</Project>
+      <Name>BusinessObject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

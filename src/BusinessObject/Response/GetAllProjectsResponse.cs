@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.Response
 {
-    public class CreateProjectResponse : Status
+    public class GetAllProjectsResponse : Status
     {
-        public CreateProjectResponse()
+        public GetAllProjectsResponse()
         {
             this.StatusCode = StatusCodes.Status_Success;
         }
 
-        public string Result;
+        public List<string> ProjectNames;
     }
 }

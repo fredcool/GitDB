@@ -10,6 +10,12 @@ namespace BAL
 {
     public interface IProjectBAL
     {
+        GetAllProjectsResponse GetAllProjects(GetAllProjectsRequest request);
+
         CreateProjectResponse CreateProject(CreateProjectRequest request);
+
+        CommitItemRequestResponse CommitItem(CommitItemRequest request);
+
+        ListItemsByProjectResponse ListItemsByProject(ListItemsByProjectRequest request);
     }
 }

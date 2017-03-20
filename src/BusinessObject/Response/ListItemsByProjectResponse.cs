@@ -1,4 +1,5 @@
-﻿using BusinessObject.Dictionary;
+﻿using BusinessObject.BusinessObjects;
+using BusinessObject.Dictionary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.Response
 {
-    public class CreateProjectResponse : Status
+    public class ListItemsByProjectResponse : Status
     {
-        public CreateProjectResponse()
+        public ListItemsByProjectResponse()
         {
             this.StatusCode = StatusCodes.Status_Success;
         }
 
-        public string Result;
+        public List<CommitItemObj> Items;
     }
 }
