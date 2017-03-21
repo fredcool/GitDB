@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>registrationform</title>
+  <meta charset="utf-8">
+  <style>
+
+	 .hidden{  
+	  display: none!important;
+	}
+	
+</style>
+
+</head>
+<body>
+<header>
+<h2>Registration Form</h2>
+</header>
+<section class="registerWindow">
+
+
+<fieldset>
+<legend align="center">Registration Details</legend>
+    <label for="myemail">Email:</label>
+	<input type="email" name="myEmail" id="myEmail"><br><br>
+	<label for="mypassword">Password:</label>
+    <input type="password" name="myPassword" id="myPassword"><br><br>
+    <label for="retype">Re-type Password:</label>
+    <input type="password" name="myretype" id="myretype"><br><br>
+<input type="reset" name="ResetButton" value="Reset" style="background-color:#FFAA55">
+<input type="submit" class="regSubmitButton" name="SubmitButton" value="Register" style="background-color:#AAFFAA">
+</fieldset>
+
+</section>
+<article class="successReg hidden">You have been successfully registered!</article>
+</body>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	jQuery(function ($) {
+	
+    $(".regSubmitButton").on('click', function (e) { 
+				
+			$('.registerWindow').addClass('hidden');
+			$('.successReg').removeClass('hidden');
+    });
+	  });
+	</script>
+</html>
