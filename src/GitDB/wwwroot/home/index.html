@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <style>
 .header {background-color:#7FD4FF; font-family: verdana; font-size:15pt;}
 hr {border:1px solid blue; hieght: 2px; background-color:blue;}
@@ -69,33 +71,33 @@ footer {font-size:10pt; text-align:center; font-weight:700; color:#007FFF;}
 	}	
 
 </style>
-<title>githubindex</title>
+<title>GitDB</title>
 <body>
-<header>
-<div class="row header">
-<div class="col-md-10 col-xs-7">Git Project</div>
-<div class="col-md-1 col-xs-3"><a href="#" id="register" alt="register"><b>Register</b></a></div>
-<div class="col-md-1 col-xs-1"><a href="#" id="login" alt="login"><b>Login</b></a></div>
-</div>
+<header class="container-fluid">
+    <div class="row header">
+        <div class="col-md-10 col-xs-7">Git Project</div>
+        <div class="col-md-1 col-xs-3"><a href="#" id="register" alt="register"><b>Register</b></a></div>
+        <div class="col-md-1 col-xs-1"><a href="#" id="login" alt="login"><b>Login</b></a></div>
+    </div>
 </header>
-<hr>
 <section>
-<article>
-<div class="row article1">
-<div class="col-md-12 col-xs-12"><u><b>Background</u></b></div>
-</div>
-</article>
-<hr>
-<article>
-<div class="row article2">
-<div class="col-md-12 col-xs-12"><u><b>Introduction</u></b></div>
-</div>
-</article>
-<hr>
-<footer>
-&copy; 2017 Cathy Fred Rinki
-</footer>
+    <article class="container article1">
+        <div class="row">
+        <div class="col-md-12 col-xs-12"><b>Background</b></div>
+        </div>
+    </article>
+    <br />
+    <article class="container article2">
+        <div class="row">
+        <div class="col-md-12 col-xs-12"><b>Introduction</b></div>
+        </div>
+    </article>
 </section>
+
+<footer>
+    &copy; 2017 Cathy Fred Rinki
+</footer>
+
 <div class="Overlaycontent hidden">
 <div>Register<div class="closeOverlay" style="cursor:pointer;float:right;">X</div>
 <iframe src="register.html" style="height:270px;width:100%;"></iframe>
