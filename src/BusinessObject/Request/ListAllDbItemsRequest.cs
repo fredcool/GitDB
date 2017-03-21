@@ -8,5 +8,6 @@ namespace BusinessObject.Request
 {
     public class ListAllDbItemsRequest
     {
+        public string DatabaseName;
     }
 }

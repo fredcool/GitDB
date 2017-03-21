@@ -1,5 +1,8 @@
-﻿using BusinessObject.Request;
+﻿using BusinessObject.BusinessObjects;
+using BusinessObject.Request;
 using BusinessObject.Response;
+using DAL;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +15,19 @@ namespace BAL
     {
         public ListAllDbItemsResponse ListAllDbItems(ListAllDbItemsRequest request)
         {
-            throw new NotImplementedException();
+            ListAllDbItemsResponse response = new ListAllDbItemsResponse();
+            TableDAL tableDAL = new TableDAL();
+            List<Table> tables = tableDAL.GetTablesByDatabase(request.DatabaseName);
+            response.Tables = new List<CommitItemObj>();
+            foreach(Table table in tables)
+            {
+                CommitItemObj item = new CommitItemObj();
+                item.ItemType = CommitItemObj.ItemType_Table;
+                item.Name = table.TABLE_NAME;
+                response.Tables.Add(item);
+            }
+
+            return response;
         }
     }
 }

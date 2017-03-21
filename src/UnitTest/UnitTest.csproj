@@ -55,6 +55,7 @@
     <Compile Include="BAL\ProjectBALTest.cs" />
     <Compile Include="BAL\DbBALTest.cs" />
     <Compile Include="BAL\UserBALTest.cs" />
+    <Compile Include="DAL\TableDALTest.cs" />
     <Compile Include="DAL\UserDALTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
