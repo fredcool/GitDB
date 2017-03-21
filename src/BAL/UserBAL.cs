@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessObject.Request;
 using BusinessObject.Response;
+using DAL;
+using Model;
+using BusinessObject.Dictionary;
 
 namespace BAL
 {
@@ -12,7 +15,17 @@ namespace BAL
     {
         public UserLoginResponse UserLogin(UserLoginRequest request)
         {
-            throw new NotImplementedException();
+            UserDAL userDAL = new UserDAL();
+            UserLoginResponse response = new UserLoginResponse();
+            User user = userDAL.GetUserByUsername(request.Username);
+
+            if(user == null || user.Password != request.Password)
+            {
+                response.StatusCode = StatusCodes.Status_Login_Failed;
+                response.StatusMessage = "Login failed";
+            }
+
+            return response;
         }
 
         public UserRegistrationResponse UserRegistration(UserRegistrationRequest request)
