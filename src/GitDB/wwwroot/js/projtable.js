@@ -1,13 +1,19 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
 import 'fixed-data-table/dist/fixed-data-table.min.css';
 
+
 const LinkCell = ({rowIndex, data, col, ...props}) => (
-	<Cell {...props}>
-		<a href="#">{data.getObjectAt(rowIndex)[col]}</a>
-	</Cell>
+		<Cell {...props}>
+			<a href="#">{data.getObjectAt(rowIndex)[col]}</a>
+		</Cell>
 );
 
 const TextCell = ({rowIndex, data, col, ...props}) => (
