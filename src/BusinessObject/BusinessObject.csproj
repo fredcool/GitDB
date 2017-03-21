@@ -51,12 +51,16 @@
     <Compile Include="Request\GetAllProjectsRequest.cs" />
     <Compile Include="Request\ListAllDbItemsRequest.cs" />
     <Compile Include="Request\ListItemsByProjectRequest.cs" />
+    <Compile Include="Request\UserLoginRequest.cs" />
+    <Compile Include="Request\UserRegistrationRequest.cs" />
     <Compile Include="Response\CommitItemRequestResponse.cs" />
     <Compile Include="Response\CreateProjectResponse.cs" />
     <Compile Include="Response\GetAllProjectsResponse.cs" />
     <Compile Include="Response\ListAllDbItemsResponse.cs" />
     <Compile Include="Response\ListItemsByProjectResponse.cs" />
     <Compile Include="Response\Status.cs" />
+    <Compile Include="Response\UserLoginResponse.cs" />
+    <Compile Include="Response\UserRegistrationResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

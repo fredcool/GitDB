@@ -11,5 +11,7 @@ namespace BusinessObject.Dictionary
         public const int Status_Success = 0;
 
         public const int Status_Error = 1;
+
+        public const int Status_Login_Failed = 1000;
     }
 }

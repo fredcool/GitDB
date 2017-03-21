@@ -47,6 +47,14 @@
       <Project>{6a2163f6-5df5-484c-85cb-3953f02df749}</Project>
       <Name>BusinessObject</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{1c6a12af-a6a5-473b-9b70-9a069003e69a}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{1bffbd82-10a9-497f-89b7-ae78ff35d4ae}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
