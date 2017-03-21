@@ -17,6 +17,15 @@ namespace Model
             }
             set { }
         }
+        public string ScriptInsert
+        {
+            get
+            {
+                return " insert into [User](Username, [Password], [Name], CreateDate, UpdateDate) "
+                    + " values(@Username, @Password, @Name, getdate(), getdate()) ";
+            }
+            set { }
+        }
         #endregion
 
         public int UserID { get; set; }

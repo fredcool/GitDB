@@ -11,6 +11,7 @@ namespace BusinessObject.Request
         public string ProjectName;
 
         //TODO Add Database configuration
+        public string DbConnectionString;
 
         //TODO 
     }
