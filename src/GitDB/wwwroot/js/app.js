@@ -10,6 +10,7 @@ import { Button } from 'react-bootstrap';
 import Header from './Header';
 import ProjTable from './ProjTable';
 import NewProjModal from './NewProjModal';
+import ProjDetail from './ProjDetail';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -24,8 +25,10 @@ class App extends React.Component {
             <br/>
             <NewProjModal />
             <br/>
+            <p><Link to="/projdetail">Project Detail Test</Link></p>
             <div>
               <Route exact path="/" component={ProjTable}/>
+              <Route path="/projdetail" component={ProjDetail}/>
             </div>
           </div>
         </Router>
