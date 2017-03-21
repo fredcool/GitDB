@@ -18,6 +18,12 @@ namespace WebService.Controllers
             return View();
         }
 
+        /// <summary>
+        /// User/UserLogin
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <param name="Password"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult UserLogin(string Username, string Password)
         {
@@ -29,6 +35,14 @@ namespace WebService.Controllers
             return Json(response);
         }
 
+        /// <summary>
+        /// User/UserRegistration
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <param name="Password"></param>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        [HttpPost]
         public ActionResult UserRegistration(string Username, string Password, string Name)
         {
             UserRegistrationRequest request = new UserRegistrationRequest();

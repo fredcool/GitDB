@@ -17,6 +17,12 @@ namespace WebService.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Project/CreateProject
+        /// </summary>
+        /// <param name="ProjectName"></param>
+        /// <param name="DbConnectionString"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult CreateProject(string ProjectName, string DbConnectionString)
         {
@@ -25,6 +31,19 @@ namespace WebService.Controllers
             request.ProjectName = ProjectName;
             request.DbConnectionString = DbConnectionString;
             CreateProjectResponse response = projectBAL.CreateProject(request);
+            return Json(response);
+        }
+
+        /// <summary>
+        /// Project/GetAllProjects
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult GetAllProjects()
+        {
+            IProjectBAL projectBAL = new ProjectBAL();
+            GetAllProjectsRequest request = new GetAllProjectsRequest();
+            var response = projectBAL.GetAllProjects(request);
             return Json(response);
         }
     }
