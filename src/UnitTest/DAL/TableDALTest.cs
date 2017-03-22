@@ -20,7 +20,7 @@ namespace UnitTest.DAL
         [TestMethod]
         public void TestMethod1()
         {
-            List<Table> actual = dal.GetTablesByDatabase();
+            List<Table> actual = dal.GetTablesByDatabase("");
         }
     }
 }
