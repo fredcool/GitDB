@@ -15,10 +15,10 @@ namespace BusinessObject.Response
             this.StatusCode = StatusCodes.Status_Success;
         }
 
-        public List<CommitItemObj> Tables;
+        public List<CommitItemDomain> Tables;
 
-        public List<CommitItemObj> StoredProcedures;
+        public List<CommitItemDomain> StoredProcedures;
 
-        public List<CommitItemObj> Functions;
+        public List<CommitItemDomain> Functions;
     }
 }

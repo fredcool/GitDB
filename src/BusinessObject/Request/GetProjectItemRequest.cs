@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.Request
 {
-    public class CreateProjectRequest
+    public class GetProjectItemRequest
     {
-        public CreateProjectRequest()
-        {
-            this.project = new ProjectDomain();
-        }
-        public ProjectDomain project;
+        public CommitItemDomain ProjectItem;
     }
 }

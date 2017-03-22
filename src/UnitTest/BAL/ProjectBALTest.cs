@@ -23,7 +23,11 @@ namespace UnitTest.BAL
         public void TestCreateProject()
         {
             CreateProjectRequest request = new CreateProjectRequest();
-            request.ProjectName = "Test";
+            request.project.ProjectName = "Test";
+            request.project.Host = "10.10.10.10";
+            request.project.Username = "Admin";
+            request.project.Password = "Admin";
+            request.project.Database = "MyDB";
             CreateProjectResponse actual = bal.CreateProject(request);
             Assert.AreEqual(StatusCodes.Status_Success, actual.StatusCode);           
         }
@@ -32,7 +36,11 @@ namespace UnitTest.BAL
         public void TestCreateProject_Test2()
         {
             CreateProjectRequest request = new CreateProjectRequest();
-            request.ProjectName = "Test2";
+            request.project.ProjectName = "Test2";
+            request.project.Host = "10.10.10.10";
+            request.project.Username = "Admin";
+            request.project.Password = "Admin";
+            request.project.Database = "MyDB";
             CreateProjectResponse actual = bal.CreateProject(request);
             Assert.AreEqual(StatusCodes.Status_Success, actual.StatusCode);
         }
@@ -42,6 +50,8 @@ namespace UnitTest.BAL
         {
             GetAllProjectsRequest request = new GetAllProjectsRequest();
             GetAllProjectsResponse response = bal.GetAllProjects(request);
+            Assert.IsNotNull(response);
+            Assert.IsTrue(response.Projects.Count > 0);
             Assert.AreEqual(StatusCodes.Status_Success, response.StatusCode);
         }
 
@@ -50,13 +60,13 @@ namespace UnitTest.BAL
         {
             CommitItemRequest request = new CommitItemRequest();
             request.ProjectName = "Test2";
-            CommitItemObj item1 = new CommitItemObj();
-            item1.ItemType = CommitItemObj.ItemType_Table;
+            CommitItemDomain item1 = new CommitItemDomain();
+            item1.ItemType = CommitItemDomain.ItemType_Table;
             item1.Name = "table1";
             request.CommitItems.Add(item1);
 
-            CommitItemObj item2 = new CommitItemObj();
-            item2.ItemType = CommitItemObj.ItemType_Table;
+            CommitItemDomain item2 = new CommitItemDomain();
+            item2.ItemType = CommitItemDomain.ItemType_Table;
             item2.Name = "table2";
             request.CommitItems.Add(item2);
 

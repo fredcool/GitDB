@@ -16,6 +16,15 @@ namespace BAL
 
         CommitItemRequestResponse CommitItem(CommitItemRequest request);
 
+        /// <summary>
+        /// Med
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        DiffItemResponse DiffItem(DiffItemRequest request);
+
         ListItemsByProjectResponse ListItemsByProject(ListItemsByProjectRequest request);
+
+        GetProjectItemResponse GetProjectItem(GetProjectItemRequest request);
     }
 }

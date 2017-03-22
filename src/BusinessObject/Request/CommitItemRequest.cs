@@ -11,11 +11,11 @@ namespace BusinessObject.Request
     {
         public CommitItemRequest()
         {
-            this.CommitItems = new List<CommitItemObj>();
+            this.CommitItems = new List<CommitItemDomain>();
         }
 
         public string ProjectName;
 
-        public List<CommitItemObj> CommitItems;
+        public List<CommitItemDomain> CommitItems;
     }
 }
