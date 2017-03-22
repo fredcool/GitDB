@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.BusinessObjects
 {
-    public class CommitItemObj
+    public class CommitItemDomain
     {
         public const string ItemType_Table = "TABLE";
 

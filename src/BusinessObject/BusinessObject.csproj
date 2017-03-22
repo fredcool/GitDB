@@ -42,20 +42,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessObjects\CommitItemObj.cs" />
+    <Compile Include="BusinessObjects\CommitItemDomain.cs" />
+    <Compile Include="BusinessObjects\ProjectDomain.cs" />
     <Compile Include="Dictionary\Properties.cs" />
     <Compile Include="Dictionary\StatusCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\CommitItemRequest.cs" />
     <Compile Include="Request\CreateProjectRequest.cs" />
+    <Compile Include="Request\DiffItemRequest.cs" />
     <Compile Include="Request\GetAllProjectsRequest.cs" />
+    <Compile Include="Request\GetProjectItemRequest.cs" />
     <Compile Include="Request\ListAllDbItemsRequest.cs" />
     <Compile Include="Request\ListItemsByProjectRequest.cs" />
     <Compile Include="Request\UserLoginRequest.cs" />
     <Compile Include="Request\UserRegistrationRequest.cs" />
     <Compile Include="Response\CommitItemRequestResponse.cs" />
     <Compile Include="Response\CreateProjectResponse.cs" />
+    <Compile Include="Response\DiffItemResponse.cs" />
     <Compile Include="Response\GetAllProjectsResponse.cs" />
+    <Compile Include="Response\GetProjectItemResponse.cs" />
     <Compile Include="Response\ListAllDbItemsResponse.cs" />
     <Compile Include="Response\ListItemsByProjectResponse.cs" />
     <Compile Include="Response\Status.cs" />
