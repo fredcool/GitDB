@@ -1,152 +1,91 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>GitDB</title>
-    <meta charset="utf-8">
-    <script>
-        var webServiceUrl = 'http://localhost:59580/';
-    </script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="js/main.js"></script>
-    <style>
-    .header {background-color:#7FD4FF; font-family: verdana; font-size:15pt;}
-    hr {border:1px solid blue; hieght: 2px; background-color:blue;}
-    .article2 {background-color:#55FF7F; font-family: Times new roman; font-size:13pt; background: url(Background.jpg) no-repeat;}
-    .article1 {background-color:#D4AAFF; font-family: Times new roman; font-size:13pt; background: url(Flower Pink Background Vector Art.jpg) no-repeat;}
-    a {text-decoration:none; color:blue;}
-    a:visited {color:#F547B1;}
-    a:hover {color:red;}
-    footer {font-size:10pt; text-align:center; font-weight:700; color:#007FFF;}
-    .overlay {
-	      position: fixed;
-	      top: 0;
-	      left: 0;
-	      width: 100%;
-	      height: 100%;
-	      background-color: #000;
-	      filter:alpha(opacity=50);
-	      -moz-opacity:0.5;
-	      -khtml-opacity: 0.5;
-	      opacity: 0.5;
-	      z-index: 10000;
-	      display: block;
-	      }
-	      .Overlaycontent{
-	      width:30%;
-	      height:auto;
-	      background-color:#fff;
-	      position: absolute;
-	      margin-left: 40%;
-	      margin-top: -13%;
-	      z-index: 111111;
-	  
-	      }
-	     .hidden{  
-	      display: none!important;
-	    }	
-
-    .overlay1 {
-	      position: fixed;
-	      top: 0;
-	      left: 0;
-	      width: 100%;
-	      height: 100%;
-	      background-color: #000;
-	      filter:alpha(opacity=50);
-	      -moz-opacity:0.5;
-	      -khtml-opacity: 0.5;
-	      opacity: 0.5;
-	      z-index: 10000;
-	      display: block;
-	      }
-	      .Overlaycontent1 {
-	      width:30%;
-	      height:auto;
-	      background-color:#fff;
-	      position: absolute;
-	      margin-left: 40%;
-	      margin-top: -13%;
-	      z-index: 111111;
-	  
-	      }
-	     .hidden1 {  
-	      display: none!important;
-	    }	
-
-    </style>
+  <title>gitproject</title>
+  <meta charset="utf-8">
+ <link rel="stylesheet" type="text/css" href="main.css" media="screen">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <header class="container-fluid">
-        <div class="row header">
-            <div class="col-md-10 col-xs-7">Git Project</div>
-            <div class="col-md-1 col-xs-3"><a href="#" id="register" alt="register"><b>Register</b></a></div>
-            <div class="col-md-1 col-xs-1"><a href="#" id="login" alt="login"><b>Login</b></a></div>
+<header>
+<div class="row header" id="container">
+<div class="col-md-12 col-sm-8 col-xs-8">Git Project
+<div class="registration">
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Register</button></div>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Enter Your Registration Details</h4>
         </div>
-    </header>
-    <section>
-        <article class="container article1">
-            <div class="row">
-                <div class="col-md-12 col-xs-12"><b>Background</b></div>
-            </div>
-        </article>
-        <br />
-        <article class="container article2">
-            <div class="row">
-                <div class="col-md-12 col-xs-12"><b>Introduction</b></div>
-            </div>
-        </article>
-    </section>
-
-    <footer>
-        &copy; 2017 Cathy Fred Rinki
-    </footer>
-
-    <div class="Overlaycontent hidden">
-        <div>
-            Register<div class="closeOverlay" style="cursor:pointer;float:right;">X</div>
-            <iframe src="register.html" style="height:270px;width:100%;"></iframe>
+        <div class="modal-body">
+         <label for="myemail">Email:</label>
+	<input type="email" name="myEmail" id="myEmail"><br><br>
+	<label for="mypassword">Password:</label>
+    <input type="password" name="myPassword" id="myPassword"><br><br>
+    <label for="retype">Re-type Password:</label>
+    <input type="password" name="myretype" id="myretype"><br><br>
         </div>
+        <div class="modal-footer">
+		<input type="reset" name="ResetButton" value="Reset" style="background-color:#FFAA55">
+		<input type="submit" class="regSubmitButton" name="SubmitButton" value="Register" style="background-color:#AAFFAA" class="btn btn-info" data-toggle="collapse" data-target="#regis">
+		<div id="regis" class="collapse">
+    You have been Registered Successfully!
+  </div>
+        </div>
+      </div>
     </div>
-    <div class="overlay hidden"></div>
-
-    <script type="text/javascript">
-        jQuery(function ($) {
-
-            $("#register").on('click', function (e) {
-
-                $('.overlay').removeClass('hidden');
-                $('.Overlaycontent').removeClass('hidden');
-            });
-            $(".closeOverlay").on('click', function (e) {
-                $('.overlay').addClass('hidden');
-                $('.Overlaycontent').addClass('hidden');
-            });
-        });
-    </script>
-    <div class="Overlaycontent1 hidden1">
-        <div>
-            Login<div class="closeOverlay" style="cursor:pointer;float:right;">X</div>
-            <iframe src="login.html" style="height:270px;width:100%;"></iframe>
+  </div>
+<span class="login">
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#mylogin">Login</button>
+</span>
+  <div class="modal fade" id="mylogin" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title1">Enter Your loggin Details</h4>
         </div>
+        <div class="modal-body">
+         <label for="myemail">Email:</label>
+	<input type="email" name="myEmail" id="myEmail"><br><br>
+	<label for="mypassword">Password:</label>
+    <input type="password" name="myPassword" id="myPassword"><br><br>
+        </div>
+        <div class="modal-footer1">
+		<input type="reset" name="ResetButton" value="Reset" style="background-color:#FFAA55">
+		<input type="submit" class="loginButton" name="loginButton" value="Login" style="background-color:#AAFFAA" class="btn btn-info" data-toggle="collapse" data-target="#log">
+		<div id="log" class="collapse">
+    You have logged in Successfully!
+  </div>
+        </div>
+      </div>
     </div>
-    <div class="overlay1 hidden1"></div>
-
-    <script type="text/javascript">
-        jQuery(function ($) {
-
-            $("#login").on('click', function (e) {
-
-                $('.overlay1').removeClass('hidden1');
-                $('.Overlaycontent1').removeClass('hidden1');
-            });
-            $(".closeOverlay").on('click', function (e) {
-                $('.overlay1').addClass('hidden1');
-                $('.Overlaycontent1').addClass('hidden1');
-            });
-        });
-    </script>
+  </div>
+<br>
+<hr>
+<section>
+<article>
+<div class="row article1">
+<div class="col-md-12 col-xs-12"><u><b>Background</u></b></div>
+</div>
+</article>
+<hr>
+<article>
+<div class="row article2">
+<div class="col-md-12 col-xs-12"><u><b>Introduction</u></b></div>
+</div>
+</article>
+<hr>
+<footer>
+&copy; 2017 Cathy Fred Rinki
+</footer>
+</div>
+</div>
+</section>
 </body>
 </html>

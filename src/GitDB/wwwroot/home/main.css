@@ -1,0 +1,8 @@
+.header {background-color:#7FD4FF; font-family: verdana; font-size:15pt;}
+hr {border:1px solid blue; hieght: 2px; background-color:blue;}
+.article2 {background-color:#55FF7F; font-family: Times new roman; font-size:13pt; background: url('Background.jpg') no-repeat;}
+.article1 {background-color:#D4AAFF; font-family: Times new roman; font-size:13pt; background: url('Flower Pink Background Vector Art.jpg') no-repeat;}
+footer {font-size:10pt; text-align:center; font-weight:700; color:#007FFF;}
+.login {position:absolute; left:92%;}
+.registration {position:absolute; right:10%; top:.70%;}
+#container {padding:1% 1%; display: -webkit-flex; display: flex; flex-flow: column wrap;}
