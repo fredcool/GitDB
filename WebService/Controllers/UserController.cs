@@ -1,6 +1,7 @@
 ﻿using BAL;
 using BusinessObject.Request;
 using BusinessObject.Response;
+using DAL;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace WebService.Controllers
         {
             UserLoginRequest request = new UserLoginRequest();
             request.Username = Username;
-            request.Password = Password;
+            request.Password = new UserDAL().GetStringSha256Hash(Password);
             IUserBAL userBAL = new UserBAL();
             UserLoginResponse response = userBAL.UserLogin(request);
             return Json(response);
@@ -47,7 +48,7 @@ namespace WebService.Controllers
         {
             UserRegistrationRequest request = new UserRegistrationRequest();
             request.Username = Username;
-            request.Password = Password;
+            request.Password = new UserDAL().GetStringSha256Hash(Password);
             request.Name = Name;
             IUserBAL userBAL = new UserBAL();
             UserRegistrationResponse response = userBAL.UserRegistration(request);
