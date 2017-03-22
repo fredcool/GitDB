@@ -24,6 +24,10 @@ namespace BAL
                 response.StatusCode = StatusCodes.Status_Login_Failed;
                 response.StatusMessage = "Login failed";
             }
+            else
+            {
+                response.StatusMessage = "Login successfully";
+            }
 
             return response;
         }
