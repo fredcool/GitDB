@@ -18,11 +18,11 @@ namespace BAL
             ListAllDbItemsResponse response = new ListAllDbItemsResponse();
             TableDAL tableDAL = new TableDAL();
             List<Table> tables = tableDAL.GetTablesByDatabase(request.DatabaseName);
-            response.Tables = new List<CommitItemObj>();
+            response.Tables = new List<CommitItemDomain>();
             foreach(Table table in tables)
             {
-                CommitItemObj item = new CommitItemObj();
-                item.ItemType = CommitItemObj.ItemType_Table;
+                CommitItemDomain item = new CommitItemDomain();
+                item.ItemType = CommitItemDomain.ItemType_Table;
                 item.Name = table.TABLE_NAME;
                 response.Tables.Add(item);
             }

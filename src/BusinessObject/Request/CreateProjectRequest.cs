@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObject.BusinessObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,10 @@ namespace BusinessObject.Request
 {
     public class CreateProjectRequest
     {
-        public string ProjectName;
-
-        //TODO Add Database configuration
-        public string DbConnectionString;
-
-        //TODO 
+        public CreateProjectRequest()
+        {
+            this.project = new ProjectDomain();
+        }
+        public ProjectDomain project;
     }
 }

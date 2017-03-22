@@ -8,5 +8,11 @@ namespace BusinessObject.BusinessObjects
 {
     public class ProjectDomain
     {
+        public string ProjectName;
+
+        public string Host;
+        public string Username;
+        public string Password;
+        public string Database;
     }
 }

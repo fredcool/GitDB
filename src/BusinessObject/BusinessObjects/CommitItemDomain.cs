@@ -12,5 +12,7 @@ namespace BusinessObject.BusinessObjects
 
         public string ItemType;
         public string Name;
+
+        public string CurrentScript;
     }
 }

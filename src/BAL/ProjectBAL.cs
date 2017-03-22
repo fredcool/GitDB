@@ -1,5 +1,6 @@
 ﻿using BusinessObject.BusinessObjects;
 using BusinessObject.Dictionary;
+using BusinessObject.Helper;
 using BusinessObject.Request;
 using BusinessObject.Response;
 using LibGit2Sharp;
@@ -28,7 +29,7 @@ namespace BAL
         {
             CreateProjectResponse response = new CreateProjectResponse();
 
-            string projectPath = ProjectBasePath + request.ProjectName;
+            string projectPath = ProjectBasePath + request.project.ProjectName;
             string result = null;
 
             if (!Directory.Exists(projectPath))
@@ -38,7 +39,10 @@ namespace BAL
                 {
                     Repository repo = new Repository(projectPath);
                     //Create README.md file
-                    File.WriteAllText(projectPath + "\\README.md", request.ProjectName);
+                    File.WriteAllText(projectPath + "\\README.md", request.project.ProjectName);
+
+                    //Create _Db.config file
+                    File.WriteAllText(projectPath + "\\_Db.config", ProjectDomainHelper.ToFileContent(request.project));
 
                     //Git add
                     Commands.Stage(repo, "*");
@@ -72,13 +76,16 @@ namespace BAL
             //TODO Get all folder name under BasePath
             string[] projectPaths = Directory.GetDirectories(ProjectBasePath);
 
-            List<string> projectNames = new List<string>();
+            List<ProjectDomain> projects = new List<ProjectDomain>();
             foreach(string projectPath in projectPaths)
             {
-                projectNames.Add(projectPath.Replace(ProjectBasePath, ""));
+                // Read _DBConfig
+                ProjectDomain projectDomain = ProjectDomainHelper.ToProjectDomain(File.ReadAllText(projectPath+"\\_Db.config"));
+                projectDomain.ProjectName = projectPath.Replace(ProjectBasePath, "");
+                projects.Add(projectDomain);
             }
 
-            response.ProjectNames = projectNames.ToList();
+            response.Projects = projects.ToList();
             return response;
         }
 
@@ -119,10 +126,11 @@ namespace BAL
             string projectPath = ProjectBasePath + request.ProjectName;
 
             string[] itemPaths = Directory.GetFiles(projectPath);
+            //TODO Get all tables
 
             if (itemPaths.Length > 0)
             {
-                response.Items = new List<CommitItemDomain>();
+                response.TableItems = new List<CommitItemDomain>();
                 foreach (string itemPath in itemPaths)
                 {
                     string fileName = Path.GetFileName(itemPath);
@@ -133,12 +141,22 @@ namespace BAL
                         string[] fileSegs = ItemName.Split('_');
                         commitItemObj.ItemType = fileSegs[0].ToUpper();
                         commitItemObj.Name = fileSegs[1];
-                        response.Items.Add(commitItemObj);
+                        response.TableItems.Add(commitItemObj);
                     }
                 }
             }
 
             return response;
+        }
+
+        public DiffItemResponse DiffItem(DiffItemRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public GetProjectItemResponse GetProjectItem(GetProjectItemRequest request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

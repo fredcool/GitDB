@@ -24,12 +24,15 @@ namespace WebService.Controllers
         /// <param name="DbConnectionString"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult CreateProject(string ProjectName, string DbConnectionString)
+        public ActionResult CreateProject(string ProjectName, string Host, string Username, string Password, string Database)
         {
             IProjectBAL projectBAL = new ProjectBAL();
             CreateProjectRequest request = new CreateProjectRequest();
-            request.ProjectName = ProjectName;
-            request.DbConnectionString = DbConnectionString;
+            request.project.ProjectName = ProjectName;
+            request.project.Host = Host;
+            request.project.Username = Username;
+            request.project.Password = Password;
+            request.project.Database = Database;
             CreateProjectResponse response = projectBAL.CreateProject(request);
             return Json(response);
         }
