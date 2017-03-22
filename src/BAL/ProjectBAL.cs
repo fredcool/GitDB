@@ -89,12 +89,12 @@ namespace BAL
             Repository repo = new Repository(projectPath);
             string commitMessage = "";
 
-            foreach (CommitItemObj commitItem in request.CommitItems)
+            foreach (CommitItemDomain commitItem in request.CommitItems)
             {
                 string itemPath = projectPath + "\\" + commitItem.ItemType + "_" + commitItem.Name + ".txt";
                 string content = "";
                 //TODO if the ItemType is table, get the schema script
-                if (commitItem.ItemType == CommitItemObj.ItemType_Table)
+                if (commitItem.ItemType == CommitItemDomain.ItemType_Table)
                 {
 
                 }
@@ -122,14 +122,14 @@ namespace BAL
 
             if (itemPaths.Length > 0)
             {
-                response.Items = new List<CommitItemObj>();
+                response.Items = new List<CommitItemDomain>();
                 foreach (string itemPath in itemPaths)
                 {
                     string fileName = Path.GetFileName(itemPath);
                     string ItemName = Path.GetFileNameWithoutExtension(itemPath);
                     if (!this.exclusionFiles.Contains(fileName))
                     {
-                        CommitItemObj commitItemObj = new CommitItemObj();
+                        CommitItemDomain commitItemObj = new CommitItemDomain();
                         string[] fileSegs = ItemName.Split('_');
                         commitItemObj.ItemType = fileSegs[0].ToUpper();
                         commitItemObj.Name = fileSegs[1];

@@ -50,13 +50,13 @@ namespace UnitTest.BAL
         {
             CommitItemRequest request = new CommitItemRequest();
             request.ProjectName = "Test2";
-            CommitItemObj item1 = new CommitItemObj();
-            item1.ItemType = CommitItemObj.ItemType_Table;
+            CommitItemDomain item1 = new CommitItemDomain();
+            item1.ItemType = CommitItemDomain.ItemType_Table;
             item1.Name = "table1";
             request.CommitItems.Add(item1);
 
-            CommitItemObj item2 = new CommitItemObj();
-            item2.ItemType = CommitItemObj.ItemType_Table;
+            CommitItemDomain item2 = new CommitItemDomain();
+            item2.ItemType = CommitItemDomain.ItemType_Table;
             item2.Name = "table2";
             request.CommitItems.Add(item2);
 

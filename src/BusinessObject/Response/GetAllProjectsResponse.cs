@@ -1,4 +1,5 @@
-﻿using BusinessObject.Dictionary;
+﻿using BusinessObject.BusinessObjects;
+using BusinessObject.Dictionary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,6 @@ namespace BusinessObject.Response
             this.StatusCode = StatusCodes.Status_Success;
         }
 
-        public List<string> ProjectNames;
+        public List<ProjectDomain> Projects;
     }
 }
