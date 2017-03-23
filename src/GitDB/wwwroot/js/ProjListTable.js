@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes}  from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
 import ProjectListStore from './helpers/ProjectListStore';
@@ -25,7 +25,7 @@ const TextCell = ({rowIndex, data, col, ...props}) => (
   </Cell>
 );
 
-export default class ProjTable extends React.Component {
+export default class ProjListTable extends React.Component {
   constructor(props) {
     super(props);
 
@@ -75,6 +75,13 @@ export default class ProjTable extends React.Component {
 
 }
 
+function mapStateToProps(state, ownProps) {
+  return {
+    projects: state.projs
+  }
+}
 
-
+ProjListTable.propTypes = {
+  projects: PropTypes.array
+}
 
