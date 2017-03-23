@@ -128,6 +128,8 @@ namespace BAL
             ListItemsByProjectResponse response = new ListItemsByProjectResponse();
             string projectPath = ProjectBasePath + request.ProjectName;
 
+            Repository repo = new Repository(projectPath);
+
             if (Directory.Exists(projectPath))
             {
                 string[] itemPaths = Directory.GetFiles(projectPath);
@@ -144,9 +146,28 @@ namespace BAL
                 if (listAllTables.Tables.Count > 0)
                 {
                     response.TableItems = new List<CommitItemDomain>();
-                    foreach (CommitItemDomain tableItem in listAllTables.Tables)
+                    foreach (CommitItemDomain commitItem in listAllTables.Tables)
                     {
-                        response.TableItems.Add(tableItem);
+                        response.TableItems.Add(commitItem);
+                        string itemPath = projectPath + "\\" + commitItem.GetCommitItemFileName();
+                        if (File.Exists(itemPath))
+                        {
+                            // Write create definition to the file
+                            File.WriteAllText(itemPath, commitItem.Definition + "\n");
+
+                            // Get Diff
+                            foreach(PatchEntryChanges c in repo.Diff.Compare<Patch>())
+                            {
+                                commitItem.Diff = c.Patch;
+                            }
+
+                            // Reset to the latest commit since we already got the difference.
+                            repo.Reset(ResetMode.Hard);
+                        }
+                        else
+                        {
+                            commitItem.Diff = commitItem.Definition;
+                        }
                     }
                 }
 
@@ -165,6 +186,30 @@ namespace BAL
                         item.Definition = function.Definition;
                         response.FunctionItems.Add(item);
                     }
+
+                    //TODO
+                    foreach(CommitItemDomain commitItem in response.FunctionItems)
+                    {
+                        string itemPath = projectPath + "\\" + commitItem.GetCommitItemFileName();
+                        if (File.Exists(itemPath))
+                        {
+                            // Write create definition to the file
+                            File.WriteAllText(itemPath, commitItem.Definition + "\n");
+
+                            // Get Diff
+                            foreach (PatchEntryChanges c in repo.Diff.Compare<Patch>())
+                            {
+                                commitItem.Diff = c.Patch;
+                            }
+
+                            // Reset to the latest commit since we already got the difference.
+                            repo.Reset(ResetMode.Hard);
+                        }
+                        else
+                        {
+                            commitItem.Diff = commitItem.Definition;
+                        }
+                    }
                 }
 
                 // Get SP
@@ -179,6 +224,30 @@ namespace BAL
                         item.Name = storedProcedure.Name;
                         item.Definition = storedProcedure.Definition;
                         response.StoredProcedureItems.Add(item);
+                    }
+
+                    //TODO
+                    foreach (CommitItemDomain commitItem in response.StoredProcedureItems)
+                    {
+                        string itemPath = projectPath + "\\" + commitItem.GetCommitItemFileName();
+                        if (File.Exists(itemPath))
+                        {
+                            // Write create definition to the file
+                            File.WriteAllText(itemPath, commitItem.Definition + "\n");
+
+                            // Get Diff
+                            foreach (PatchEntryChanges c in repo.Diff.Compare<Patch>())
+                            {
+                                commitItem.Diff = c.Patch;
+                            }
+
+                            // Reset to the latest commit since we already got the difference.
+                            repo.Reset(ResetMode.Hard);
+                        }
+                        else
+                        {
+                            commitItem.Diff = commitItem.Definition;
+                        }
                     }
                 }
             }

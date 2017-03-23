@@ -20,6 +20,12 @@ namespace BusinessObject.BusinessObjects
         /// </summary>
         public string Definition;
 
+        public string Status;
         public string Diff;
+
+        public string GetCommitItemFileName()
+        {
+            return ItemType + "_" + Name + ".txt";
+        }
     }
 }
