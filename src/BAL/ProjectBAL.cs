@@ -3,7 +3,9 @@ using BusinessObject.Dictionary;
 using BusinessObject.Helper;
 using BusinessObject.Request;
 using BusinessObject.Response;
+using DAL;
 using LibGit2Sharp;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -126,24 +128,65 @@ namespace BAL
             ListItemsByProjectResponse response = new ListItemsByProjectResponse();
             string projectPath = ProjectBasePath + request.ProjectName;
 
-            string[] itemPaths = Directory.GetFiles(projectPath);
-
-            // Get all tables
-            IDbBAL dbBAL = new DbBAL();
-            ListAllTablesRequest listAllTablesRequest = new ListAllTablesRequest();
-            listAllTablesRequest.ProjectName = request.ProjectName;
-            ListAllTablesResponse listAllTables = dbBAL.ListAllTables(listAllTablesRequest);
-
-            if (listAllTables.Tables.Count > 0)
+            if (Directory.Exists(projectPath))
             {
-                response.TableItems = new List<CommitItemDomain>();
-                foreach (CommitItemDomain tableItem in listAllTables.Tables)
+                string[] itemPaths = Directory.GetFiles(projectPath);
+
+                // Get connection string from Project's _Db.config file
+                ProjectDomain projectDomain = ProjectDomainHelper.ToProjectDomain(File.ReadAllText(projectPath + "\\_Db.config"));
+
+                // Get all tables
+                IDbBAL dbBAL = new DbBAL();
+                ListAllTablesRequest listAllTablesRequest = new ListAllTablesRequest();
+                listAllTablesRequest.ProjectName = request.ProjectName;
+                ListAllTablesResponse listAllTables = dbBAL.ListAllTables(listAllTablesRequest);
+
+                if (listAllTables.Tables.Count > 0)
                 {
+                    response.TableItems = new List<CommitItemDomain>();
+                    foreach (CommitItemDomain tableItem in listAllTables.Tables)
+                    {
                         response.TableItems.Add(tableItem);
+                    }
+                }
+
+                DbObjectDAL dbObjectDAL = new DbObjectDAL(ProjectDomainHelper.ToConnectionString(projectDomain));
+                // Get Function
+                List<DbObject> functions = dbObjectDAL.GetDbObjectsByType(DbObject.Type_Function);
+
+                if(functions != null && functions.Count > 0)
+                {
+                    response.FunctionItems = new List<CommitItemDomain>();
+                    foreach(DbObject function in functions)
+                    {
+                        CommitItemDomain item = new CommitItemDomain();
+                        item.ItemType = CommitItemDomain.ItemType_Function;
+                        item.Name = function.Name;
+                        item.Definition = function.Definition;
+                        response.FunctionItems.Add(item);
+                    }
+                }
+
+                // Get SP
+                List<DbObject> storedProcedures = dbObjectDAL.GetDbObjectsByType(DbObject.Type_Stored_Procedure);
+                if (storedProcedures != null && storedProcedures.Count > 0)
+                {
+                    response.StoredProcedureItems = new List<CommitItemDomain>();
+                    foreach (DbObject storedProcedure in storedProcedures)
+                    {
+                        CommitItemDomain item = new CommitItemDomain();
+                        item.ItemType = CommitItemDomain.ItemType_Function;
+                        item.Name = storedProcedure.Name;
+                        item.Definition = storedProcedure.Definition;
+                        response.StoredProcedureItems.Add(item);
+                    }
                 }
             }
-
-            
+            else
+            {
+                response.StatusCode = StatusCodes.Status_Error;
+                response.StatusMessage = "Project not exists";
+            }
 
             return response;
         }
