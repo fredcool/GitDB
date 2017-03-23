@@ -9,7 +9,7 @@ export function loadProjectsSuccess(projs) {
 export function loadProjects() {  
   return function(dispatch) {
     return projApi.getProjects().then(projects => {
-      dispatch();
+      dispatch(loadProjectsSuccess(projects));
     }).catch(error => {
       throw(error);
     });

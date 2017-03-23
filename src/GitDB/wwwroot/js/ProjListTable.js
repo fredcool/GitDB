@@ -1,7 +1,6 @@
 import React, {PropTypes}  from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
-import ProjectListStore from './helpers/ProjectListStore';
 import {
   BrowserRouter as Router,
   Route,
@@ -31,14 +30,9 @@ export default class ProjListTable extends React.Component {
 
     this.state = {
       dataList: new FakeObjectDataListStore(1000000),
-      projectList: new ProjectListStore()
     };
   }
 
-  //ajax call testing
-  componentDidMount() {
-    this.state.projectList.printResponse();
-  }
 
   render() {
     var {dataList} = this.state;

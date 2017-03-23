@@ -24,7 +24,6 @@ export default class App extends React.Component {
         <div className="container">
           <NewProjModal />
           <br/>
-          <p>Project Detail Test</p>
           {this.props.children}
         </div>
       </div>
