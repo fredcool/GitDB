@@ -23,6 +23,7 @@ namespace BAL
             this.ProjectBasePath = ConfigurationManager.AppSettings["RepoBasePath"];
             exclusionFiles = new List<string>();
             exclusionFiles.Add("README.md");
+            exclusionFiles.Add("_Db.config");
         }
 
         public CreateProjectResponse CreateProject(CreateProjectRequest request)
@@ -126,25 +127,23 @@ namespace BAL
             string projectPath = ProjectBasePath + request.ProjectName;
 
             string[] itemPaths = Directory.GetFiles(projectPath);
-            //TODO Get all tables
 
-            if (itemPaths.Length > 0)
+            // Get all tables
+            IDbBAL dbBAL = new DbBAL();
+            ListAllTablesRequest listAllTablesRequest = new ListAllTablesRequest();
+            listAllTablesRequest.ProjectName = request.ProjectName;
+            ListAllTablesResponse listAllTables = dbBAL.ListAllTables(listAllTablesRequest);
+
+            if (listAllTables.Tables.Count > 0)
             {
                 response.TableItems = new List<CommitItemDomain>();
-                foreach (string itemPath in itemPaths)
+                foreach (CommitItemDomain tableItem in listAllTables.Tables)
                 {
-                    string fileName = Path.GetFileName(itemPath);
-                    string ItemName = Path.GetFileNameWithoutExtension(itemPath);
-                    if (!this.exclusionFiles.Contains(fileName))
-                    {
-                        CommitItemDomain commitItemObj = new CommitItemDomain();
-                        string[] fileSegs = ItemName.Split('_');
-                        commitItemObj.ItemType = fileSegs[0].ToUpper();
-                        commitItemObj.Name = fileSegs[1];
-                        response.TableItems.Add(commitItemObj);
-                    }
+                        response.TableItems.Add(tableItem);
                 }
             }
+
+            
 
             return response;
         }

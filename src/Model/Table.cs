@@ -8,11 +8,11 @@ namespace Model
 {
     public class Table
     {
-        public string ScriptGetTablesByDatabase
+        public string ScriptGetTables
         {
             get
             {
-                return " SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_CATALOG = @TABLE_CATALOG ";
+                return " SELECT * FROM INFORMATION_SCHEMA.TABLES ";
             }
             set { }
         }

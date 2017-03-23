@@ -57,7 +57,7 @@
     <Compile Include="Request\DiffItemRequest.cs" />
     <Compile Include="Request\GetAllProjectsRequest.cs" />
     <Compile Include="Request\GetProjectItemRequest.cs" />
-    <Compile Include="Request\ListAllDbItemsRequest.cs" />
+    <Compile Include="Request\ListAllTablesRequest.cs" />
     <Compile Include="Request\ListItemsByProjectRequest.cs" />
     <Compile Include="Request\UserLoginRequest.cs" />
     <Compile Include="Request\UserRegistrationRequest.cs" />
@@ -66,7 +66,7 @@
     <Compile Include="Response\DiffItemResponse.cs" />
     <Compile Include="Response\GetAllProjectsResponse.cs" />
     <Compile Include="Response\GetProjectItemResponse.cs" />
-    <Compile Include="Response\ListAllDbItemsResponse.cs" />
+    <Compile Include="Response\ListAllTablesResponse.cs" />
     <Compile Include="Response\ListItemsByProjectResponse.cs" />
     <Compile Include="Response\Status.cs" />
     <Compile Include="Response\UserLoginResponse.cs" />

@@ -12,7 +12,7 @@ namespace BusinessObject.Helper
     {
         public static string ToConnectionString(ProjectDomain src)
         {
-            string connectionString = "Data Source=" + src.Host + ";Initial Catalog=" + src.Host + ";Integrated Security=False;User Id=" + src.Username + ";Password=" + src.Password + ";MultipleActiveResultSets=True";
+            string connectionString = "Data Source=" + src.Host + ";Initial Catalog=" + src.Database + ";Integrated Security=False;User Id=" + src.Username + ";Password=" + src.Password + ";MultipleActiveResultSets=True";
             return connectionString;
         }
 

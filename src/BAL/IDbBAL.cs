@@ -10,6 +10,6 @@ namespace BAL
 {
     public interface IDbBAL
     {
-        ListAllDbItemsResponse ListAllDbItems(ListAllDbItemsRequest request);
+        ListAllTablesResponse ListAllTables(ListAllTablesRequest request);
     }
 }

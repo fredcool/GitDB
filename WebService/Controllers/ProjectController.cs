@@ -49,5 +49,20 @@ namespace WebService.Controllers
             var response = projectBAL.GetAllProjects(request);
             return Json(response);
         }
+
+        /// <summary>
+        /// Project/ListItemsByProject
+        /// </summary>
+        /// <param name="ProjectName"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ListItemsByProject(string ProjectName)
+        {
+            IProjectBAL projectBAL = new ProjectBAL();
+            ListItemsByProjectRequest request = new ListItemsByProjectRequest();
+            request.ProjectName = ProjectName;
+            ListItemsByProjectResponse response = projectBAL.ListItemsByProject(request);
+            return Json(response);
+        }
     }
 }

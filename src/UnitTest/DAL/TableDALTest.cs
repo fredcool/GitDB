@@ -14,13 +14,23 @@ namespace UnitTest.DAL
         [TestInitialize]
         public void setup()
         {
-            dal = new TableDAL();
+            dal = new TableDAL("Data Source=34.208.160.108;Initial Catalog=GitDB;Integrated Security=False;User Id=GitDB;Password=GitDBAdmin;MultipleActiveResultSets=True");
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestGetTablesByDatabase()
         {
-            List<Table> actual = dal.GetTablesByDatabase("");
+            dal = new TableDAL("Data Source=34.208.160.108;Initial Catalog=GitDB;Integrated Security=False;User Id=GitDB;Password=GitDBAdmin;MultipleActiveResultSets=True");
+            List<Table> actual = dal.GetTables();
+            Assert.IsNotNull(actual);
+        }
+
+        [TestMethod]
+        public void TestGetTablesByDatabase_Fusion()
+        {
+            dal = new TableDAL("Data Source=34.208.160.108;Initial Catalog=Fusion;Integrated Security=False;User Id=GitDB;Password=GitDBAdmin;MultipleActiveResultSets=True");
+            List<Table> actual = dal.GetTables();
+            Assert.IsNotNull(actual);
         }
     }
 }

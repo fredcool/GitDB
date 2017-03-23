@@ -1,44 +1,46 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
-using System.Data.SqlClient;
-using System.Configuration;
-using Model;
 
 namespace DAL
 {
-    public class TableDAL
+    public class DbObjectDAL
     {
         public string connectionString;
 
-        public TableDAL()
+        public DbObjectDAL()
         {
             this.connectionString = ConfigurationManager.ConnectionStrings["GitDB"].ConnectionString;
         }
 
-        public TableDAL(string ConnectionString)
+        public DbObjectDAL(string ConnectionString)
         {
             this.connectionString = ConnectionString;
         }
 
-        public List<Table> GetTables()
+        public List<DbObject> GetDbObjectsByType(string Type)
         {
             var connection = new SqlConnection(this.connectionString);
-            Table info = new Table();
-            List<Table> result = null;
+            DbObject info = new DbObject();
+            List<DbObject> result = new List<DbObject>();
+
             try
             {
                 connection.Open();
-                result = connection.Query<Table>(info.ScriptGetTables).ToList();
+                result = connection.Query<DbObject>(info.ScriptGetDbObjectsByType, new { Type = Type}).ToList();
                 connection.Close();
             }
-            catch (Exception)
+            catch(Exception)
             {
-
+                result = null;
             }
+
             return result;
         }
     }

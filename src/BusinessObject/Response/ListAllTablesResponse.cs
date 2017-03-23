@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.Response
 {
-    public class ListAllDbItemsResponse : Status
+    public class ListAllTablesResponse : Status
     {
-        public ListAllDbItemsResponse()
+        public ListAllTablesResponse()
         {
             this.StatusCode = StatusCodes.Status_Success;
         }

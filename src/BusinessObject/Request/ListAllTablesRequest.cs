@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BusinessObject.Request
 {
-    public class ListAllDbItemsRequest
+    public class ListAllTablesRequest
     {
-        public string DatabaseName;
+        public string ProjectName;
     }
 }
