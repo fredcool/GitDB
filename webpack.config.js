@@ -3,11 +3,16 @@ const webpack = require('webpack');
 module.exports = {
     // decided to do a single page app so we have only 1 entry
     entry: [
-      './src/GitDB/wwwroot/js/app.js'
+      './src/GitDB/wwwroot/js/index.js'
     ],
     output: {
         path: __dirname + '/build',
         filename: 'bundle.js'
+    },
+    resolve:{
+      alias: {
+        jquery: "jquery/src/jquery"
+      }
     },
     module: {
         rules: [
@@ -19,6 +24,9 @@ module.exports = {
                 presets:['es2015', 'react'],
                 plugins: ["transform-object-rest-spread"]
               }
+            },
+            { test: require.resolve("jquery-mockjax"),
+              loader: 'imports-loader?$=jquery'
             },
             { test: /\.css$/,
               use: [ 'style-loader', 'css-loader' ]
@@ -32,7 +40,12 @@ module.exports = {
         ]
     },
     plugins: [
-      new webpack.NoEmitOnErrorsPlugin()
+      new webpack.NoEmitOnErrorsPlugin(),
+      new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        "window.jQuery": "jquery"
+      }),
     ],
     node: {
       console: true,

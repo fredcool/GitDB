@@ -1,6 +1,7 @@
 import React from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
+import ProjectListStore from './helpers/ProjectListStore';
 import {
   BrowserRouter as Router,
   Route,
@@ -10,6 +11,8 @@ import {
 import 'fixed-data-table/dist/fixed-data-table.min.css';
 
 
+
+//TO DO: Fix redirection to Project Detail Page
 const LinkCell = ({rowIndex, data, col, ...props}) => (
     <Cell {...props}>
       <Link to="/projdetail">{data.getObjectAt(rowIndex)[col]}</Link>
@@ -28,7 +31,13 @@ export default class ProjTable extends React.Component {
 
     this.state = {
       dataList: new FakeObjectDataListStore(1000000),
+      projectList: new ProjectListStore()
     };
+  }
+
+  //ajax call testing
+  componentDidMount() {
+    this.state.projectList.printResponse();
   }
 
   render() {

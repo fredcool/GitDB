@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Table, Column, Cell } from 'fixed-data-table';
-import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
+//import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
 
 
-const LinkCell = ({rowIndex, data, col, ...props}) => (
+const LinkCell = ({rowIndex, type, name, func, ...props}) => (
     <Cell {...props}>
-      <a href="#">{data.getObjectAt(rowIndex)[col]}</a>
+      <a href="#" onClick={func}>{name}</a>
     </Cell>
 );
 
@@ -13,13 +13,13 @@ export default class ProjDetailObjTables extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    /*this.state = {
       dataList: new FakeObjectDataListStore(1000000),
-    };
+    };*/
   }
 
   render() {
-    var {dataList} = this.state;
+    //var {dataList} = this.state;
     return (
       <div>
         <h4>Database Objects</h4>
@@ -31,7 +31,9 @@ export default class ProjDetailObjTables extends React.Component {
         height={200}>
           <Column
             header={<Cell>Tables</Cell>}
-            cell={<LinkCell data={dataList} col="tableName" />}
+            cell={<LinkCell type={this.props.objType}
+                            name={this.props.objName}
+                            func={this.props.handleClick} />}
             fixed={true}
             width={300}/>
         </Table>
@@ -52,3 +54,15 @@ export default class ProjDetailObjTables extends React.Component {
     )
   }
 }
+
+ProjDetailObjTables.propTypes = {
+  objId: React.PropTypes.number,
+  objType: React.PropTypes.string,
+  objName: React.PropTypes.string,
+  handleClick: React.PropTypes.func
+}
+
+ProjDetailObjTables.defaultProps = {
+  objTable: 'table',
+  objName: 'cathy_test'
+};
