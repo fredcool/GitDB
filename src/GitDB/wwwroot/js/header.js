@@ -4,10 +4,13 @@ import { PageHeader } from 'react-bootstrap';
 import { Link, IndexLink } from 'react-router';
 
 export default class Header extends React.Component {
+
   render() {
+    const baseUrl = "/src/GitDB/wwwroot/";
+    
     return (
       <div className="container">
-        <IndexLink to="/" 
+        <IndexLink to={baseUrl} 
           activeClassName="active">
           <PageHeader>GitDB <small> @ITU</small></PageHeader>
         </IndexLink>
