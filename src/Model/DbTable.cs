@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Table
+    public class DbTable
     {
         public string ScriptGetTables
         {
@@ -21,5 +21,7 @@ namespace Model
         public string TABLE_SCHEMA { get; set; }
         public string TABLE_NAME { get; set; }
         public string TABLE_TYPE { get; set; }
+
+        public string Definition { get; set; }
     }
 }

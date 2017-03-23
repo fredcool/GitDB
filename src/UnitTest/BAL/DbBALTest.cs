@@ -19,7 +19,7 @@ namespace UnitTest.BAL
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestListAllTables()
         {
             ListAllTablesRequest request = new ListAllTablesRequest();
             request.ProjectName = "Test2";

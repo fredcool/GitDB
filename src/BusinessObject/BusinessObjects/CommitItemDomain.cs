@@ -9,10 +9,17 @@ namespace BusinessObject.BusinessObjects
     public class CommitItemDomain
     {
         public const string ItemType_Table = "TABLE";
+        public const string ItemType_Function = "FUNCTION";
+        public const string ItemType_Stored_Procedure = "SP";
 
         public string ItemType;
         public string Name;
 
-        public string CurrentScript;
+        /// <summary>
+        /// Script
+        /// </summary>
+        public string Definition;
+
+        public string Diff;
     }
 }

@@ -35,10 +35,10 @@ namespace BAL
                 // Get connection string from Project's _Db.config file
                 ProjectDomain projectDomain = ProjectDomainHelper.ToProjectDomain(File.ReadAllText(projectPath + "\\_Db.config"));
 
-                TableDAL tableDAL = new TableDAL(ProjectDomainHelper.ToConnectionString(projectDomain));
-                List<Table> tables = tableDAL.GetTables();
+                DbTableDAL tableDAL = new DbTableDAL(ProjectDomainHelper.ToConnectionString(projectDomain));
+                List<DbTable> tables = tableDAL.GetTables();
                 response.Tables = new List<CommitItemDomain>();
-                foreach (Table table in tables)
+                foreach (DbTable table in tables)
                 {
                     CommitItemDomain item = new CommitItemDomain();
                     item.ItemType = CommitItemDomain.ItemType_Table;

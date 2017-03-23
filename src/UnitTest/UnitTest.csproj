@@ -56,7 +56,7 @@
     <Compile Include="BAL\DbBALTest.cs" />
     <Compile Include="BAL\UserBALTest.cs" />
     <Compile Include="BusinessHelper\Helper\ProjectDomainHelperTest.cs" />
-    <Compile Include="DAL\TableDALTest.cs" />
+    <Compile Include="DAL\DbTableDALTest.cs" />
     <Compile Include="DAL\DbObjectDALTest.cs" />
     <Compile Include="DAL\UserDALTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
