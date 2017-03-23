@@ -14,5 +14,14 @@ namespace BusinessObject.BusinessObjects
         public string Username;
         public string Password;
         public string Database;
+
+        public override string ToString()
+        {
+            return "ProjectName: " + ProjectName
+                + "; Host: " + Host
+                + "; Username: " + Username
+                + "; Password: " + Password
+                + "; Database: " + Database;
+        }
     }
 }

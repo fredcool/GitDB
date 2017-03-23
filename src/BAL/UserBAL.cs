@@ -34,7 +34,30 @@ namespace BAL
 
         public UserRegistrationResponse UserRegistration(UserRegistrationRequest request)
         {
-            throw new NotImplementedException();
+            UserDAL userDAL = new UserDAL();
+            UserRegistrationResponse response = new UserRegistrationResponse();
+
+            User user = userDAL.GetUserByUsername(request.Username);
+            if (user != null)
+            {
+                response.StatusCode = StatusCodes.Status_User_Exists;
+                response.StatusMessage = "User already exists. Please login.";
+            }
+            else
+            {
+                user = new User();
+                user.Username = request.Username;
+                user.Password = request.Password;
+                user.Name = request.Name;
+                int insertResult = userDAL.Insert(user);
+                if (insertResult == 0)
+                {
+                    response.StatusCode = StatusCodes.Status_Register_Failed;
+                    response.StatusMessage = "Unable to register. Please try again";
+                }
+            }
+
+            return response;
         }
     }
 }

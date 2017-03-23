@@ -28,5 +28,16 @@ namespace UnitTest.BAL
             UserLoginResponse actual = bal.UserLogin(request);
             Assert.AreEqual(actual.StatusCode, StatusCodes.Status_Success);
         }
+
+        [TestMethod]
+        public void TestUserRegistration()
+        {
+            UserRegistrationRequest request = new UserRegistrationRequest();
+            request.Username = "Test300@gmail.com";
+            request.Password = new UserDAL().GetStringSha256Hash("12345");
+            request.Name = "Test 300";
+            UserRegistrationResponse actual = bal.UserRegistration(request);
+            Assert.AreEqual(StatusCodes.Status_Success, actual.StatusCode);
+        }
     }
 }

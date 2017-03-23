@@ -43,7 +43,7 @@ namespace BAL
                     CommitItemDomain item = new CommitItemDomain();
                     item.ItemType = CommitItemDomain.ItemType_Table;
                     item.Name = table.TABLE_NAME;
-                    item.Definition = table.Definition;
+                    item.CurrentDefinition = table.Definition;
                     response.Tables.Add(item);
                 }
             }

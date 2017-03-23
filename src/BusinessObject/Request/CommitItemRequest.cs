@@ -16,6 +16,8 @@ namespace BusinessObject.Request
 
         public string ProjectName;
 
+        public string CommitMessage;
+
         public List<CommitItemDomain> CommitItems;
     }
 }

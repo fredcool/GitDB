@@ -33,7 +33,7 @@ namespace WebService.Controllers
             request.project.Username = Username;
             request.project.Password = Password;
             request.project.Database = Database;
-            CreateProjectResponse response = projectBAL.CreateProject(request);
+            var response = projectBAL.CreateProject(request);
             return Json(response);
         }
 

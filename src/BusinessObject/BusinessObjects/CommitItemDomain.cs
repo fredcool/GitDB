@@ -16,12 +16,19 @@ namespace BusinessObject.BusinessObjects
         public string Name;
 
         /// <summary>
-        /// Script
+        /// Script which commited
         /// </summary>
-        public string Definition;
+        public string CommittedDefinition;
+
+        /// <summary>
+        /// Current Script
+        /// </summary>
+        public string CurrentDefinition;
 
         public string Status;
         public string Diff;
+
+        public string CommitMessage;
 
         public string GetCommitItemFileName()
         {

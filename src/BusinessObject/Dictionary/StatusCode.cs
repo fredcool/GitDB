@@ -13,5 +13,9 @@ namespace BusinessObject.Dictionary
         public const int Status_Error = 1;
 
         public const int Status_Login_Failed = 1000;
+
+        public const int Status_User_Exists = 1001;
+
+        public const int Status_Register_Failed = 1002;
     }
 }

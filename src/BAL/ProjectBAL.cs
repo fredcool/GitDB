@@ -31,41 +31,52 @@ namespace BAL
         public CreateProjectResponse CreateProject(CreateProjectRequest request)
         {
             CreateProjectResponse response = new CreateProjectResponse();
-
+            LogDAL logDAL = new LogDAL();
             string projectPath = ProjectBasePath + request.project.ProjectName;
             string result = null;
 
-            if (!Directory.Exists(projectPath))
+            logDAL.InsertLog(request.project.ToString());
+            logDAL.InsertLog(projectPath);
+
+            try
             {
-                result = Repository.Init(projectPath);
-                if (!string.IsNullOrWhiteSpace(result))
+                if (!Directory.Exists(projectPath))
                 {
-                    Repository repo = new Repository(projectPath);
-                    //Create README.md file
-                    File.WriteAllText(projectPath + "\\README.md", request.project.ProjectName);
+                    result = Repository.Init(projectPath);
+                    if (!string.IsNullOrWhiteSpace(result))
+                    {
+                        Repository repo = new Repository(projectPath);
+                        //Create README.md file
+                        File.WriteAllText(projectPath + "\\README.md", request.project.ProjectName);
 
-                    //Create _Db.config file
-                    File.WriteAllText(projectPath + "\\_Db.config", ProjectDomainHelper.ToFileContent(request.project));
+                        //Create _Db.config file
+                        File.WriteAllText(projectPath + "\\_Db.config", ProjectDomainHelper.ToFileContent(request.project));
 
-                    //Git add
-                    Commands.Stage(repo, "*");
+                        //Git add
+                        Commands.Stage(repo, "*");
 
-                    // Create the committer's signature and commit
-                    Signature author = new Signature(Properties.AuthorName, Properties.AuthorEmail, DateTime.Now);
-                    Signature committer = new Signature(Properties.CommitterName, Properties.CommitterEmail, DateTime.Now);
+                        // Create the committer's signature and commit
+                        Signature author = new Signature(Properties.AuthorName, Properties.AuthorEmail, DateTime.Now);
+                        Signature committer = new Signature(Properties.CommitterName, Properties.CommitterEmail, DateTime.Now);
 
-                    repo.Commit("Project Initialization", author, committer);
+                        repo.Commit("Project Initialization", author, committer);
+                    }
+                    else
+                    {
+                        response.StatusCode = StatusCodes.Status_Error;
+                        response.StatusMessage = "Unable to create project";
+                    }
                 }
                 else
                 {
+                    logDAL.InsertLog("Project already exists");
                     response.StatusCode = StatusCodes.Status_Error;
-                    response.StatusMessage = "Unable to create project";
+                    response.StatusMessage = "Project already exists";
                 }
             }
-            else
+            catch(Exception e)
             {
-                response.StatusCode = StatusCodes.Status_Error;
-                response.StatusMessage = "Project already exists";
+                logDAL.InsertLog(e.ToString());
             }
 
             response.Result = result;
@@ -97,17 +108,17 @@ namespace BAL
             CommitItemRequestResponse response = new CommitItemRequestResponse();
             string projectPath = ProjectBasePath + request.ProjectName;
             Repository repo = new Repository(projectPath);
-            string commitMessage = "";
+            string commitMessage = !string.IsNullOrWhiteSpace(request.CommitMessage) ? request.CommitMessage + "\n" : "";
 
             foreach (CommitItemDomain commitItem in request.CommitItems)
             {
                 string itemPath = projectPath + "\\" + commitItem.ItemType + "_" + commitItem.Name + ".txt";
                 string content = "";
                 //TODO if the ItemType is table, get the schema script
-                if (commitItem.ItemType == CommitItemDomain.ItemType_Table)
-                {
 
-                }
+                //TODO Function
+
+                //TODO SP
 
                 commitMessage += "Commit " + commitItem.ItemType + ": " +commitItem.Name + "\n";
                 File.WriteAllText(itemPath, content);
@@ -152,8 +163,10 @@ namespace BAL
                         string itemPath = projectPath + "\\" + commitItem.GetCommitItemFileName();
                         if (File.Exists(itemPath))
                         {
+                            //
+
                             // Write create definition to the file
-                            File.WriteAllText(itemPath, commitItem.Definition + "\n");
+                            File.WriteAllText(itemPath, commitItem.CurrentDefinition + "\n");
 
                             // Get Diff
                             foreach(PatchEntryChanges c in repo.Diff.Compare<Patch>())
@@ -166,7 +179,7 @@ namespace BAL
                         }
                         else
                         {
-                            commitItem.Diff = commitItem.Definition;
+                            commitItem.Diff = commitItem.CurrentDefinition;
                         }
                     }
                 }
@@ -183,7 +196,7 @@ namespace BAL
                         CommitItemDomain item = new CommitItemDomain();
                         item.ItemType = CommitItemDomain.ItemType_Function;
                         item.Name = function.Name;
-                        item.Definition = function.Definition;
+                        item.CurrentDefinition = function.Definition;
                         response.FunctionItems.Add(item);
                     }
 
@@ -194,7 +207,7 @@ namespace BAL
                         if (File.Exists(itemPath))
                         {
                             // Write create definition to the file
-                            File.WriteAllText(itemPath, commitItem.Definition + "\n");
+                            File.WriteAllText(itemPath, commitItem.CurrentDefinition + "\n");
 
                             // Get Diff
                             foreach (PatchEntryChanges c in repo.Diff.Compare<Patch>())
@@ -207,7 +220,7 @@ namespace BAL
                         }
                         else
                         {
-                            commitItem.Diff = commitItem.Definition;
+                            commitItem.Diff = commitItem.CurrentDefinition;
                         }
                     }
                 }
@@ -222,7 +235,7 @@ namespace BAL
                         CommitItemDomain item = new CommitItemDomain();
                         item.ItemType = CommitItemDomain.ItemType_Function;
                         item.Name = storedProcedure.Name;
-                        item.Definition = storedProcedure.Definition;
+                        item.CurrentDefinition = storedProcedure.Definition;
                         response.StoredProcedureItems.Add(item);
                     }
 
@@ -233,7 +246,7 @@ namespace BAL
                         if (File.Exists(itemPath))
                         {
                             // Write create definition to the file
-                            File.WriteAllText(itemPath, commitItem.Definition + "\n");
+                            File.WriteAllText(itemPath, commitItem.CurrentDefinition + "\n");
 
                             // Get Diff
                             foreach (PatchEntryChanges c in repo.Diff.Compare<Patch>())
@@ -246,7 +259,7 @@ namespace BAL
                         }
                         else
                         {
-                            commitItem.Diff = commitItem.Definition;
+                            commitItem.Diff = commitItem.CurrentDefinition;
                         }
                     }
                 }

@@ -37,6 +37,25 @@ namespace DAL
             return result;
         }
 
+        public int Insert(User info)
+        {
+            var connection = new SqlConnection(this.connectionString);
+            int result = 0;
+            try
+            {
+                connection.Open();
+                result = connection.Execute(info.ScriptInsert, info);
+            }
+            catch (Exception)
+            {
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return result;
+        }
+
         public string GetStringSha256Hash(string text)
         {
             if (String.IsNullOrEmpty(text))
