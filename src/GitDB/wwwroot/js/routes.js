@@ -6,10 +6,11 @@ import ProjListTable from './ProjListTable';
 import ProjDetail from './ProjDetail';
 
 const baseUrl = "/src/GitDB/wwwroot/";
+const projDetailUrl = baseUrl + "projdetail/:id";
 
 export default (  
   <Route path={baseUrl} component={App}>
     <IndexRoute component={ProjListTable} />
-    <Route path="/projdetail" component={ProjDetail}/>
+    <Route path={projDetailUrl} component={ProjDetail} />
   </Route>
 );

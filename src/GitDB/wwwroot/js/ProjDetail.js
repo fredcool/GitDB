@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {PropTypes} from 'react';  
+import {connect} from 'react-redux';
 import { Grid, Row, Col, FormGroup,
          FormControl, ControlLabel } from 'react-bootstrap';
 import ProjDetailObjTables from './ProjDetailObjTables';

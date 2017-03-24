@@ -1,5 +1,6 @@
 import React, {PropTypes}  from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
+import {Link} from 'react-router';
 import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
 import {connect} from 'react-redux';
 import projApi from './client/GetAllProject';
@@ -10,19 +11,21 @@ import 'fixed-data-table/dist/fixed-data-table.min.css';
 
 //LinkCell is a functional object
 const LinkCell = ({rowIndex, data, ...props}) => {
-  let str = data[rowIndex];
+  const baseUrl = "/src/GitDB/wwwroot/";
+  const projDetailUrl = baseUrl + "projdetail/";
   return (
-    <Cell {...props}>
-      {data[rowIndex]}
-    </Cell>
+    <Link to={projDetailUrl + rowIndex}>
+      <Cell {...props}>
+        {data[rowIndex]}
+      </Cell>
+    </Link>
   );
 };
 
-
-const TestCell = ({rowIndex, data, col, ...props}) => (
-  <Cell {...props}>
-    {data.getObjectAt(rowIndex)[col]}
-  </Cell>
+const TextCell = ({rowIndex, data, ...props}) => (
+    <Cell {...props}>
+      {data[rowIndex]}
+    </Cell>
 );
 
 class ProjListTable extends React.Component {
@@ -40,7 +43,7 @@ class ProjListTable extends React.Component {
     return (
       <Table
         rowsCount={this.props.projects.projects.length}
-        rowHeight={100}
+        rowHeight={50}
         headerHeight={50}
         width={940}
         height={500}>
@@ -52,13 +55,13 @@ class ProjListTable extends React.Component {
         />
         <Column
           header={<Cell>Database</Cell>}
-          cell={<LinkCell data={dbList} />}
+          cell={<TextCell data={dbList} />}
           fixed={true}
           width={260}
         />
         <Column
           header={<Cell>GitHub URL</Cell>}
-          cell={<LinkCell data={hostList} />}
+          cell={<TextCell data={hostList} />}
           fixed={true}
           width={400}
         />
