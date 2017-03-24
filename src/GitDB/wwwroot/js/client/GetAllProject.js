@@ -6,8 +6,8 @@ export default {
 
   return axios.post(url)
     .then(response => {
-      console.log("Show: " + response.json());
-      return response.json();
+      console.log("test");
+      return response.data;
     }).catch(error => {
       return error;
     });

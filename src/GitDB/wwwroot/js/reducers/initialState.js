@@ -1,3 +1,3 @@
-export default {  
-  projs: []
+export default {
+  Projects: []
 }
