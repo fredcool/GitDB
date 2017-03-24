@@ -25,9 +25,6 @@ module.exports = {
                 plugins: ["transform-object-rest-spread"]
               }
             },
-            { test: require.resolve("jquery-mockjax"),
-              loader: 'imports-loader?$=jquery'
-            },
             { test: /\.css$/,
               use: [ 'style-loader', 'css-loader' ]
             },

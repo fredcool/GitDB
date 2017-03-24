@@ -11,11 +11,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class App extends React.Component {
 
-  //ajax call testing
-  componentDidMount() {
-    apitest.requestPost(Math.ceil(Math.random() * 10));
-  }
-
   render() {
     return (
       <div className="contianer-fluid">

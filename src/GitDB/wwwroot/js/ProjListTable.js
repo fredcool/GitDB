@@ -1,81 +1,83 @@
 import React, {PropTypes}  from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
+import {connect} from 'react-redux';
+import projApi from './client/GetAllProject';
 
 import 'fixed-data-table/dist/fixed-data-table.min.css';
 
-
-
 //TO DO: Fix redirection to Project Detail Page
-const LinkCell = ({rowIndex, data, col, ...props}) => (
-    <Cell {...props}>
-      <Link to="/projdetail">{data.getObjectAt(rowIndex)[col]}</Link>
-    </Cell>
-);
 
-const TextCell = ({rowIndex, data, col, ...props}) => (
+//LinkCell is a functional object
+const LinkCell = ({rowIndex, data, ...props}) => {
+  let str = data[rowIndex];
+  return (
+    <Cell {...props}>
+      {data[rowIndex]}
+    </Cell>
+  );
+};
+
+
+const TestCell = ({rowIndex, data, col, ...props}) => (
   <Cell {...props}>
     {data.getObjectAt(rowIndex)[col]}
   </Cell>
 );
 
-export default class ProjListTable extends React.Component {
+class ProjListTable extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      dataList: new FakeObjectDataListStore(1000000),
-    };
   }
 
-
   render() {
-    var {dataList} = this.state;
+    const data = this.props.projects.projects;
+    const projNameList = data.map( d => d.ProjectName );
+    const dbList = data.map( d => d.Database );
+    const hostList = data.map( d => d.Host);
+
     return (
-      <Router>
-        <Table
-          rowsCount={dataList.getSize()}
-          rowHeight={50}
-          headerHeight={50}
-          width={940}
-          height={500}>
-          <Column
-            header={<Cell>Project Name</Cell>}
-            cell={<LinkCell data={dataList} col="companyName" />}
-            fixed={true}
-            width={280}
-          />
-          <Column
-            header={<Cell>Database</Cell>}
-            cell={<LinkCell data={dataList} col="dbname" />}
-            fixed={true}
-            width={260}
-          />
-          <Column
-            header={<Cell>GitHub URL</Cell>}
-            cell={<LinkCell data={dataList} col="url" />}
-            fixed={true}
-            width={400}
-          />
-        </Table>
-      </Router>
+      <Table
+        rowsCount={this.props.projects.projects.length}
+        rowHeight={100}
+        headerHeight={50}
+        width={940}
+        height={500}>
+        <Column
+          header={<Cell>Project Name</Cell>}
+          cell={<LinkCell data={projNameList} />}
+          fixed={true}
+          width={280}
+        />
+        <Column
+          header={<Cell>Database</Cell>}
+          cell={<LinkCell data={dbList} />}
+          fixed={true}
+          width={260}
+        />
+        <Column
+          header={<Cell>GitHub URL</Cell>}
+          cell={<LinkCell data={hostList} />}
+          fixed={true}
+          width={400}
+        />
+      </Table>
     );
   }
 
 }
 
 function mapStateToProps(state, ownProps) {
+  console.log("Maping State");
+  console.log(state);
   return {
-    projects: state.projs
+    projects: state
   }
 }
 
 ProjListTable.propTypes = {
-  projects: PropTypes.array
+  projects: PropTypes.array.isRequired,
 }
 
+export default connect(mapStateToProps)(ProjListTable);  
