@@ -5,20 +5,20 @@ import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
 import {connect} from 'react-redux';
 import projApi from './client/GetAllProject';
 import NewProjModal from './NewProjModal';
-
+import configureStore from './store/configureStore';  
+import {loadProjectDetail} from './actions/projActions';
 
 import 'fixed-data-table/dist/fixed-data-table.min.css';
-
-//TO DO: Fix redirection to Project Detail Page
 
 //LinkCell is a functional object
 const LinkCell = ({rowIndex, data, handleClick, ...props}) => {
   const baseUrl = "/src/GitDB/wwwroot/";
   const projDetailUrl = baseUrl + "projdetail";
+  let str = data[rowIndex];
   return (
-    <Link to={projDetailUrl} onClick={handleClick}>
+    <Link to={projDetailUrl} onClick={handleClick.bind(this,str)}>
       <Cell {...props}>
-        {data[rowIndex]}
+        {str}
       </Cell>
     </Link>
   );
@@ -34,10 +34,16 @@ class ProjListTable extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleClick = this.handleClick.bind(this);
+    //this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
+  handleClick(projname) {
+    const store = configureStore();
+    console.log("ProjectName Here!");
+    let requestdata = projname;
+    console.log(requestdata);
+
+    store.dispatch(loadProjectDetail(requestdata));
     console.log("User clicks a table!");
   }
 
@@ -91,7 +97,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 ProjListTable.propTypes = {
-  projects: PropTypes.array.isRequired,
+  projects: PropTypes.object
 }
 
 export default connect(mapStateToProps)(ProjListTable);  

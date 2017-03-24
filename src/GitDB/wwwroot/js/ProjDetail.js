@@ -3,13 +3,11 @@ import {connect} from 'react-redux';
 import { Grid, Row, Col, FormGroup,
          FormControl, ControlLabel } from 'react-bootstrap';
 import ProjDetailObjTables from './ProjDetailObjTables';
-import apitest from './client/apitest';
+import configureStore from './store/configureStore'; 
 
-
-export default class ProjDetail extends React.Component {
+class ProjDetail extends React.Component {
   constructor(props) {
     super(props);
-
 
     this.handleClick = this.handleClick.bind(this);
   }
@@ -20,6 +18,14 @@ export default class ProjDetail extends React.Component {
   }
 
   render() {
+    const data = this.props.data;
+    console.log("7777");
+    //console.log(data);
+    const store = configureStore();
+    let unsubscribe = store.subscribe(() =>
+      console.log(store.getState())
+    )
+
     return (
       <Grid>
         <Row className="show-grid">
@@ -46,3 +52,17 @@ export default class ProjDetail extends React.Component {
   }
 
 }
+
+function mapStateToProps(state, ownProps) {
+  console.log("Maping State For ProjDetail");
+  console.log(state);
+  return {
+    data: state
+  }
+}
+
+ProjDetail.propTypes = {
+
+}
+
+export default connect(mapStateToProps)(ProjDetail); 
