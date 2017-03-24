@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessObjects\CommitItemDomain.cs" />
+    <Compile Include="BusinessObjects\CommitLogBo.cs" />
     <Compile Include="BusinessObjects\ProjectDomain.cs" />
     <Compile Include="Dictionary\Properties.cs" />
     <Compile Include="Dictionary\StatusCode.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Request\GetProjectItemRequest.cs" />
     <Compile Include="Request\ListAllTablesRequest.cs" />
     <Compile Include="Request\ListItemsByProjectRequest.cs" />
+    <Compile Include="Request\ProjectLogRequest.cs" />
     <Compile Include="Request\UserLoginRequest.cs" />
     <Compile Include="Request\UserRegistrationRequest.cs" />
     <Compile Include="Response\CommitItemRequestResponse.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="Response\GetProjectItemResponse.cs" />
     <Compile Include="Response\ListAllTablesResponse.cs" />
     <Compile Include="Response\ListItemsByProjectResponse.cs" />
+    <Compile Include="Response\ProjectLogResponse.cs" />
     <Compile Include="Response\Status.cs" />
     <Compile Include="Response\UserLoginResponse.cs" />
     <Compile Include="Response\UserRegistrationResponse.cs" />

@@ -26,5 +26,7 @@ namespace BAL
         ListItemsByProjectResponse ListItemsByProject(ListItemsByProjectRequest request);
 
         GetProjectItemResponse GetProjectItem(GetProjectItemRequest request);
+
+        ProjectLogResponse ProjectLog(ProjectLogRequest request);
     }
 }

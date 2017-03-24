@@ -108,5 +108,20 @@ namespace WebService.Controllers
             }
             return Json(new { });
         }
+
+        /// <summary>
+        /// Project/ProjectLog
+        /// </summary>
+        /// <param name="ProjectName"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ProjectLog(string ProjectName)
+        {
+            IProjectBAL projectBAL = new ProjectBAL();
+            ProjectLogRequest request = new ProjectLogRequest();
+            request.ProjectName = ProjectName;
+            ProjectLogResponse response = projectBAL.ProjectLog(request);
+            return Json(response);
+        }
     }
 }

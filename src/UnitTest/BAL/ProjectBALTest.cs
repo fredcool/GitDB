@@ -83,5 +83,14 @@ namespace UnitTest.BAL
 
             Assert.AreEqual(StatusCodes.Status_Success, response.StatusCode);
         }
+
+        [TestMethod]
+        public void TestProjectLog()
+        {
+            ProjectLogRequest request = new ProjectLogRequest();
+            request.ProjectName = "Test2";
+            ProjectLogResponse actual = bal.ProjectLog(request);
+            Assert.AreEqual(StatusCodes.Status_Success, actual.StatusCode);
+        }
     }
 }

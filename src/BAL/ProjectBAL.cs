@@ -139,10 +139,9 @@ namespace BAL
             ListItemsByProjectResponse response = new ListItemsByProjectResponse();
             string projectPath = ProjectBasePath + request.ProjectName;
 
-            Repository repo = new Repository(projectPath);
-
             if (Directory.Exists(projectPath))
             {
+                Repository repo = new Repository(projectPath);
                 string[] itemPaths = Directory.GetFiles(projectPath);
 
                 // Get connection string from Project's _Db.config file
@@ -281,6 +280,35 @@ namespace BAL
         public GetProjectItemResponse GetProjectItem(GetProjectItemRequest request)
         {
             throw new NotImplementedException();
+        }
+
+        public ProjectLogResponse ProjectLog(ProjectLogRequest request)
+        {
+            ProjectLogResponse response = new ProjectLogResponse();
+            string projectPath = ProjectBasePath + request.ProjectName;
+
+            if (Directory.Exists(projectPath))
+            {
+                Repository repo = new Repository(projectPath);
+                response.FullLog += "Project: " + request.ProjectName + "\n******************************************\n";
+                foreach(Commit c in repo.Commits.ToList())
+                {
+                    CommitLogBo log = new CommitLogBo();
+                    log.Id = c.Id.Sha;
+                    log.Log = c.Message;
+                    log.Author = c.Author.Name + "<" + c.Author.Email + ">";
+
+                    response.logs.Add(log);
+                    response.FullLog += "\nCommit: " + log.Id.Substring(0, 7) + " \nAuthor: " + log.Author + "\nMessage:\n" + log.Log + "\n========================";
+                }
+            }
+            else
+            {
+                response.StatusCode = StatusCodes.Status_Error;
+                response.StatusMessage = "Project not exists";
+            }
+
+            return response;
         }
     }
 }
