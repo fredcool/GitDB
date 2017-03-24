@@ -6,10 +6,21 @@ export default {
 
   return axios.post(url)
     .then(response => {
-      console.log("test");
       return response.data;
     }).catch(error => {
       return error;
     });
+  },
+
+  getProjectDetail: function(project) {
+    let url = " http://34.208.160.108/WebService/Project/ListItemsByProject";
+
+    return axios.post(url)
+      .then(response => {
+        return response.data;
+      }).catch(error => {
+        return error;
+      });
   }
+
 }

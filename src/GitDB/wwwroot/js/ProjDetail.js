@@ -15,7 +15,7 @@ export default class ProjDetail extends React.Component {
   }
 
   handleClick() {
-    apitest.requestPost(8);
+    console.log("Click in ProjDetail");
 
   }
 
@@ -24,7 +24,7 @@ export default class ProjDetail extends React.Component {
       <Grid>
         <Row className="show-grid">
           <Col lg={4}>
-            <ProjDetailObjTables handleClick={handleClick}/>
+            <ProjDetailObjTables handleClick={this.handleClick}/>
           </Col>
 
           <Col lg={4}>

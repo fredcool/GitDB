@@ -4,17 +4,19 @@ import {Link} from 'react-router';
 import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
 import {connect} from 'react-redux';
 import projApi from './client/GetAllProject';
+import NewProjModal from './NewProjModal';
+
 
 import 'fixed-data-table/dist/fixed-data-table.min.css';
 
 //TO DO: Fix redirection to Project Detail Page
 
 //LinkCell is a functional object
-const LinkCell = ({rowIndex, data, ...props}) => {
+const LinkCell = ({rowIndex, data, handleClick, ...props}) => {
   const baseUrl = "/src/GitDB/wwwroot/";
-  const projDetailUrl = baseUrl + "projdetail/";
+  const projDetailUrl = baseUrl + "projdetail";
   return (
-    <Link to={projDetailUrl + rowIndex}>
+    <Link to={projDetailUrl} onClick={handleClick}>
       <Cell {...props}>
         {data[rowIndex]}
       </Cell>
@@ -32,6 +34,11 @@ class ProjListTable extends React.Component {
   constructor(props) {
     super(props);
 
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    console.log("User clicks a table!");
   }
 
   render() {
@@ -41,31 +48,35 @@ class ProjListTable extends React.Component {
     const hostList = data.map( d => d.Host);
 
     return (
-      <Table
-        rowsCount={this.props.projects.projects.length}
-        rowHeight={50}
-        headerHeight={50}
-        width={940}
-        height={500}>
-        <Column
-          header={<Cell>Project Name</Cell>}
-          cell={<LinkCell data={projNameList} />}
-          fixed={true}
-          width={280}
-        />
-        <Column
-          header={<Cell>Database</Cell>}
-          cell={<TextCell data={dbList} />}
-          fixed={true}
-          width={260}
-        />
-        <Column
-          header={<Cell>GitHub URL</Cell>}
-          cell={<TextCell data={hostList} />}
-          fixed={true}
-          width={400}
-        />
-      </Table>
+      <div>
+        <NewProjModal />
+        <br/>
+        <Table
+          rowsCount={this.props.projects.projects.length}
+          rowHeight={50}
+          headerHeight={50}
+          width={940}
+          height={500}>
+          <Column
+            header={<Cell>Project Name</Cell>}
+            cell={<LinkCell data={projNameList} handleClick={this.handleClick}/>}
+            fixed={true}
+            width={280}
+          />
+          <Column
+            header={<Cell>Database</Cell>}
+            cell={<TextCell data={dbList} />}
+            fixed={true}
+            width={260}
+          />
+          <Column
+            header={<Cell>GitHub URL</Cell>}
+            cell={<TextCell data={hostList} />}
+            fixed={true}
+            width={400}
+          />
+        </Table>
+      </div>
     );
   }
 
