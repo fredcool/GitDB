@@ -1,0 +1,1 @@
+export const LOAD_PROJS_SUCCESS = 'LOAD_PROJS_SUCCESS';

@@ -15,6 +15,7 @@ class FakeObjectDataListStore {
       email: faker.internet.email(),
       url: faker.internet.url(),
       dbname: faker.database.collation(),
+      tableName: faker.hacker.noun(),
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       zipCode: faker.address.zipCode(),
