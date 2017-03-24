@@ -113,7 +113,7 @@ namespace BAL
             foreach (CommitItemDomain commitItem in request.CommitItems)
             {
                 string itemPath = projectPath + "\\" + commitItem.ItemType + "_" + commitItem.Name + ".txt";
-                string content = "";
+                string content = commitItem.CurrentDefinition;
                 //TODO if the ItemType is table, get the schema script
 
                 //TODO Function

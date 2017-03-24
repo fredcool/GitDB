@@ -9,15 +9,10 @@ namespace BusinessObject.Request
 {
     public class CommitItemRequest
     {
-        public CommitItemRequest()
-        {
-            this.CommitItems = new List<CommitItemDomain>();
-        }
+        public string ProjectName { get; set; }
 
-        public string ProjectName;
+        public string CommitMessage { get; set; }
 
-        public string CommitMessage;
-
-        public List<CommitItemDomain> CommitItems;
+        public List<CommitItemDomain> CommitItems { get; set; }
     }
 }

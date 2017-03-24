@@ -1,4 +1,5 @@
 ﻿using BAL;
+using BusinessObject.BusinessObjects;
 using BusinessObject.Request;
 using BusinessObject.Response;
 using System;
@@ -63,6 +64,49 @@ namespace WebService.Controllers
             request.ProjectName = ProjectName;
             ListItemsByProjectResponse response = projectBAL.ListItemsByProject(request);
             return Json(response);
+        }
+
+        /// <summary>
+        /// Project/CommitItem
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CommitItem(string ProjectName, string CommitMessage, string ItemType, string Name, string CurrentDefinition)
+        {
+            IProjectBAL projectBAL = new ProjectBAL();
+            CommitItemRequest request = new CommitItemRequest();
+            request.CommitItems = new List<CommitItemDomain>();
+            request.ProjectName = ProjectName;
+            request.CommitMessage = CommitMessage;
+            CommitItemDomain item = new CommitItemDomain();
+            item.ItemType = ItemType;
+            item.Name = Name;
+            item.CurrentDefinition = CurrentDefinition;
+            request.CommitItems.Add(item);
+            if (!string.IsNullOrWhiteSpace(request.ProjectName) && request.CommitItems.Count > 0)
+            {
+                CommitItemRequestResponse response = projectBAL.CommitItem(request);
+                return Json(response);
+            }
+            return Json(new { });
+        }
+
+        /// <summary>
+        /// Project/CommitItems
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CommitItems(CommitItemRequest request)
+        {
+            IProjectBAL projectBAL = new ProjectBAL();
+            if (!string.IsNullOrWhiteSpace(request.ProjectName) && request.CommitItems.Count > 0)
+            {
+                CommitItemRequestResponse response = projectBAL.CommitItem(request);
+                return Json(response);
+            }
+            return Json(new { });
         }
     }
 }
