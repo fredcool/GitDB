@@ -4,20 +4,20 @@ import projApi from '../client/GetAllProject';
 
 export function loadProjectsSuccess(projs) {
   console.log("Load Success!");
-  console.log(projs); // array of all projects
+  //console.log(projs); // array of all projects
   return {type: types.LOAD_PROJS_SUCCESS, projs};
 }
 
 export function loadProjectDetailSuccess(details) {
   console.log("Project Detail Load Success!");
-  console.log(details); // array of all projects
+  console.log(details); // array of all details
   return {type: types.LOAD_PROJ_DETAIL_SUCCESS, details};
 }
 
-export function createProjectSuccess(details) {
+export function createProjectSuccess(response) {
   console.log("Create Project Success!");
-  console.log(details); // array of all projects
-  return {type: types.CREATE_PROJ_SUCCESS, details};
+  console.log(response); // array of all projects
+  return {type: types.CREATE_PROJ_SUCCESS, response};
 }
 
 

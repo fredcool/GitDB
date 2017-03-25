@@ -1,4 +1,10 @@
 export default {
   Projects: [],
-  Details: []
+  Details: {
+    TableItems: [],
+    StoredProcedureItems: [],
+    FunctionItems: [],
+    StatusCode: 0,
+    StatusMessage: null
+  },
 }
