@@ -24,13 +24,20 @@ export default {
       });
   },
 
-  createProject: function(projname) {
-    let url = "http://34.208.160.108/WebService/Project/CreateProject";
+  createProject: function(data) {
+    let baseurl = "http://34.208.160.108/WebService/Project/CreateProject?ProjectName=" + data.projname;
+    let moreparam = "&Host=" + data.host + "&Username=" + data.username
+                    + "&Passward=" + data.passward + "&Database="
+                    + data.dbname ;
 
-    return axios.post(url, {params: projname})
+    let url = baseurl + moreparam;
+    console.log(url);
+
+    return axios.post(url)
       .then(response => {
         return response.data;
       }).catch(error => {
+        console.log(error.message);
         return error;
       });
   }

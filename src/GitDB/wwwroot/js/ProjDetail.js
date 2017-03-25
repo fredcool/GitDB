@@ -78,7 +78,7 @@ class ProjDetail extends React.Component {
         <Row className="show-grid">
           <ButtonToolbar>
             <Button bsStyle="info">Commit Change</Button>
-            <Button bsStyle="info">Git Diff</Button>
+            <Button bsStyle="info">Git Log</Button>
           </ButtonToolbar>
         </Row>
         <Row className="show-grid">

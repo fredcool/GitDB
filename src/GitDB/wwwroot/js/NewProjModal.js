@@ -1,40 +1,51 @@
 import React from 'react';
 import { Popover, Tooltip, Button, Modal, OverlayTrigger,
          Form, FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap';
-import configureStore from './store/configureStore';  
-import {createProject} from './actions/projActions';
+import {bindActionCreators} from 'redux';
+import * as projActions from './actions/projActions';
+import {connect} from 'react-redux';
 
 
-export default class NewProjModal extends React.Component {
+class NewProjModal extends React.Component {
   constructor() {
     super();
     this.state = {
-      showModal: false,
+      showModal: false
     };
 
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
+    this.save = this.save.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  getInitialState() {
-    return { showModal: false };
+  save() {
+    //let data = "shine";
+    let userinput = { projname: this.state.projname,
+                      host: this.state.host,
+                      username: this.state.username,
+                      password: this.state.password,
+                      dbname: this.state.dbname };
+    console.log(userinput);
+
+    this.props.actions.createProject(userinput);
+    this.close();
   }
 
   close() {
-    const store = configureStore();
-    let data = {'ProjectName': 'dsdfh',
-                'Host': '34.206.160.108',
-                'Username': 'GitDB',
-                'Password': 'GitDBAdmin',
-                'Database': 'GitDB'};
-    store.dispatch(createProject(data));
-
     this.setState({ showModal: false });
 
   }
 
   open() {
     this.setState({ showModal: true });
+  }
+
+  handleChange(event) {
+    let stateName = event.target.name;
+    //let obj = { [stateName] : event.target.value };
+
+    this.setState({ [stateName] : event.target.value });
   }
 
   render() {
@@ -70,7 +81,10 @@ export default class NewProjModal extends React.Component {
                   Project Name
                 </Col>
                 <Col sm={9}>
-                  <FormControl type="projname" placeholder="ProjName" />
+                  <FormControl name="projname" 
+                    placeholder=""
+                    value={this.state.projname}
+                    onChange={this.handleChange} />
                 </Col>
               </FormGroup>
 
@@ -80,7 +94,10 @@ export default class NewProjModal extends React.Component {
                   Host
                 </Col>
                 <Col sm={9}>
-                  <FormControl type="host" placeholder="Host" />
+                  <FormControl name="host" 
+                               placeholder=""
+                               value={this.state.host}
+                               onChange={this.handleChange} />
                 </Col>
               </FormGroup>
 
@@ -89,7 +106,10 @@ export default class NewProjModal extends React.Component {
                   User Name
                 </Col>
                 <Col sm={9}>
-                  <FormControl type="username" placeholder="UserName" />
+                  <FormControl name="username" 
+                               placeholder=""
+                               value={this.state.username}
+                               onChange={this.handleChange} />
                 </Col>
               </FormGroup>
 
@@ -98,7 +118,10 @@ export default class NewProjModal extends React.Component {
                   Password
                 </Col>
                 <Col sm={9}>
-                  <FormControl type="password" placeholder="Password" />
+                  <FormControl name="password"
+                               placeholder=""
+                               value={this.state.password}
+                               onChange={this.handleChange} />
                 </Col>
               </FormGroup>
 
@@ -107,7 +130,10 @@ export default class NewProjModal extends React.Component {
                   Database
                 </Col>
                 <Col sm={9}>
-                  <FormControl type="database" placeholder="" />
+                  <FormControl name="dbname"
+                               placeholder=""
+                               value={this.state.dbname}
+                               onChange={this.handleChange} />
                 </Col>
               </FormGroup>
              </Form>
@@ -129,7 +155,7 @@ export default class NewProjModal extends React.Component {
 
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.close}>Save</Button>
+            <Button onClick={this.save}>Create</Button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -137,3 +163,31 @@ export default class NewProjModal extends React.Component {
   }
 
 }
+
+function mapDispatchToProps(dispatch) {  
+  return {
+    actions: bindActionCreators(projActions, dispatch)
+  };
+}
+
+function mapStateToProps(state, ownProps) {
+  console.log("Maping State In NewProjModal");
+  console.log(state);
+  return {
+    projects: state
+  }
+}
+
+NewProjModal.propTypes = {
+
+}
+
+NewProjModal.defaultProps = {
+  projname: "",
+  host: "",
+  username: "",
+  password: "",
+  dbname: ""
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewProjModal);

@@ -14,10 +14,10 @@ export function loadProjectDetailSuccess(details) {
   return {type: types.LOAD_PROJ_DETAIL_SUCCESS, details};
 }
 
-export function createProjectSuccess(details) {
+export function createProjectSuccess(response) {
   console.log("Create Project Success!");
-  console.log(details); // array of all projects
-  return {type: types.CREATE_PROJ_SUCCESS, details};
+  console.log(response); // array of all projects
+  return {type: types.CREATE_PROJ_SUCCESS, response};
 }
 
 

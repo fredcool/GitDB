@@ -3,9 +3,7 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import {Link} from 'react-router';
 import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
 import {connect} from 'react-redux';
-import projApi from './client/GetAllProject';
 import NewProjModal from './NewProjModal'; 
-//import {loadProjectDetail} from './actions/projActions';
 import {bindActionCreators} from 'redux';  
 import * as projActions from './actions/projActions'; 
 
