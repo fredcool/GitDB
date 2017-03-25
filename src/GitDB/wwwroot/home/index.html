@@ -32,8 +32,8 @@
             </div>
             <div class="col-md-2">
                 <div class="registration">
-                    <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">Register</button>
-                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#mylogin">Login</button>
+                    <button type="button" class="btn btn-success btn-md" id="btnRegister">Register</button>
+                    <button type="button" class="btn btn-primary btn-md" id="btnLogin">Login</button>
                 </div>
                 </div>
             </div>
@@ -54,19 +54,19 @@
                     <div class="item active">
                         <img src="resource/project.jpg" alt="Create Project" style="width:100%">
                         <div class="carousel-caption">
-                            <h1>CREATE YOUR OWN PROJECT</h1>
+                            <h3 style="color: #000;">CREATE YOUR OWN PROJECT</h3>
                         </div>
                     </div>
                     <div class="item">
                         <img src="resource/monitor.png" alt="monitor" style="width:100%">
                         <div class="carousel-caption">
-                            <h1>MONITOR WORK DONE BY OTHERS ON THE PROJECT</h1>
+                            <h3 style="color: #cfd74f;">MONITOR WORK DONE BY OTHERS ON THE PROJECT</h3>
                         </div>
                     </div>
                     <div class="item">
                         <img src="resource/controlandmanage.jpg" alt="Flower" style="width:100%">
                         <div class="carousel-caption">
-                            <h1>THREBY CONTROL AND MANAGE YOUR PROJECT</h1>
+                            <h3>THREBY CONTROL AND MANAGE YOUR PROJECT</h3>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
         <br />
         <article id="section_howitworks">
             <div class="container">
-                <div class="row">
+                <div class="row jumbotron">
                     <div class="col-xs-12 col-md-offset-2 col-md-8">
                         <div class="howitwork">HOW IT WORKS?</div>
                         <p id="howitwork">
@@ -95,44 +95,43 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <div style="text-align:center;">
+                        <div style="text-align:center; margin-bottom: 20px;">
                             <img src="resource/createproject.jpg" class="img-circle" alt="Create Project" style="width:250px; height:250px;">
                         </div>
-                        <ul>
-                            <li>Get registered</li>
-                            <li>Login to your account</li>
-                            <li>Choose the predesigned Project Templates</li>
-                            <li>Choose Host link</li>
-                            <li>And you are good to go...<img src="resource/go.jpg" alt="go" style="width:80px; height:80px;"></li>
+                        <ul class="list-group">
+                            <li class="list-group-item">Get registered</li>
+                            <li class="list-group-item">Login to your account</li>
+                            <li class="list-group-item">Choose the predesigned Project Templates</li>
+                            <li class="list-group-item">Choose Host link</li>
+                            <li class="list-group-item">And you are good to go...<img src="resource/go.jpg" alt="go" style="width:80px; height:80px;"></li>
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <div style="text-align:center;">
+                        <div style="text-align:center; margin-bottom: 20px;">
                             <img src="resource/monitor.jpg" class="img-circle" alt="Monitor Project" style="width:250px; height:250px;">
                         </div>
-                        <ul>
-                            <li><b>git init</b> is creates while creating a project</li>
-                            <li>Run unit test to check the scripts </li>
-                            <li>Check database log and commits by peers</li>
-                            <li>Check adding and deleting coloumns and tables </li>
-                            <li>Check stored procedures</li>
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>git init</b> is creates while creating a project</li>
+                            <li class="list-group-item">Run unit test to check the scripts </li>
+                            <li class="list-group-item">Check database log and commits by peers</li>
+                            <li class="list-group-item">Check adding and deleting coloumns and tables </li>
+                            <li class="list-group-item">Check stored procedures</li>
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <div style="text-align:center;">
+                        <div style="text-align:center; margin-bottom: 20px;">
                             <img src="resource/control-5.jpg" class="img-circle" alt="Control Project" style="width:250px; height:250px;">
                         </div>
-                        <ul>
-                            <li>Thereby Manage your Project</li>
-                            <li>Get <b>git diff</b></li>
-                            <li>
+                        <ul class="list-group">
+                            <li class="list-group-item">Thereby Manage your Project</li>
+                            <li class="list-group-item">Get <b>git diff</b></li>
+                            <li class="list-group-item">
                                 Also receive notification via email
                                 <br>for all the changes being made in
                                 <br>the project
                             </li>
                         </ul>
                     </div>
-                    <br>
                     <div class="features">
                     </div>
                 </div>
@@ -199,7 +198,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="mylogin" role="dialog">
+    <div class="modal fade" id="myLogin" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

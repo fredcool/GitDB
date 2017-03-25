@@ -1,17 +1,38 @@
 // A $( document ).ready() block.
 $( document ).ready(function() {
-	
+
+    $(window).resize(function () {
+        resize();
+    });
+
+    function resize() {
+        var winHeight = $(window).height();
+        var headerHeight = $('header').height();
+
+        $('.carousel-inner .item').css('height', (winHeight - headerHeight) + 'px');
+    }
+
+    resize();
+
 	$(".reset").click(function() {
-	$ ("#myEmail").val("");	
-	$("#myPassword").val("");
-		
+	    $("#myEmail").val("");	
+	    $("#myPassword").val("");
 	});
+
 	$(".reset1").click(function() {
-	$ ("#myname").val("");
-	$ ("#myEmail1").val("");	
-	$("#myPassword1").val("");
-		
+	    $("#myname").val("");
+	    $("#myEmail1").val("");	
+	    $("#myPassword1").val("");
 	});
+
+	$('#btnLogin').click(function () {
+	    $('#myLogin').modal('show');
+	});
+
+	$('#btnRegister').click(function () {
+	    $('#myModal').modal('show');
+	});
+
 	$(".loginButton").click(function () {
 	    var email = $("#myEmail").val();
 	    var password = $("#myPassword").val();
@@ -37,7 +58,7 @@ $( document ).ready(function() {
           });
 	});
 
-	$(".registerinButton").click(function() {
+	$(".registerinButton").click(function () {
 	    var name = $ ("#myname").val();
 	    var email = $("#myEmail1").val();
 	    var password = $("#myPassword1").val();

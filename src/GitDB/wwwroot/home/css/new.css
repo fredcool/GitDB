@@ -6,9 +6,9 @@ footer {font-size:10pt; text-align:center; font-weight:700; color:#007FFF;}
 .login {position:absolute; left:92%; bottom:46%;}
 .registration {position:absolute; right:10%; top:.70%;}
 #container { display: -webkit-flex; display: flex; flex-flow: column wrap;}
-.carousel-inner 
+.carousel-inner .item
 {
-    max-height: 500px;
+    min-height: 500px;
 }
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {width: 80%; margin: auto;}
@@ -21,6 +21,7 @@ nav {text-align:center;}
 nav a 
 {
     display: inline-block;
+    margin:10px 10px;
 }
 footer nav a 
 {
