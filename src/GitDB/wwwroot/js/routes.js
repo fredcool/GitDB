@@ -8,9 +8,20 @@ import ProjDetail from './ProjDetail';
 const baseUrl = "/src/GitDB/wwwroot/";
 const projDetailUrl = baseUrl + "projdetail";
 
-export default (  
-  <Route path={baseUrl} component={App}>
-    <IndexRoute component={ProjListTable} />
-    <Route path={projDetailUrl} component={ProjDetail} />
+const prodBaseUrl = "/Console/index.html";
+const prodProjDetailUrl = "projdetail";
+
+export default (
+  <Route>
+    <Route path={baseUrl} component={App}>
+      <IndexRoute component={ProjListTable} />
+      <Route path={projDetailUrl} component={ProjDetail} />
+    </Route>
+    <Route>
+      <Route path={prodBaseUrl} component={App}>
+        <IndexRoute component={ProjListTable} />
+      </Route>
+      <Route path={prodProjDetailUrl} component={ProjDetail} />
+    </Route>
   </Route>
 );

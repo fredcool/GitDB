@@ -20,12 +20,14 @@ namespace BAL
     {
         public string ProjectBasePath;
         public List<string> exclusionFiles;
+        private LogDAL logDAL;
         public ProjectBAL()
         {
             this.ProjectBasePath = ConfigurationManager.AppSettings["RepoBasePath"];
             exclusionFiles = new List<string>();
             exclusionFiles.Add("README.md");
             exclusionFiles.Add("_Db.config");
+            this.logDAL = new LogDAL();
         }
 
         public CreateProjectResponse CreateProject(CreateProjectRequest request)
@@ -110,16 +112,65 @@ namespace BAL
             Repository repo = new Repository(projectPath);
             string commitMessage = !string.IsNullOrWhiteSpace(request.CommitMessage) ? request.CommitMessage + "\n" : "";
 
+            // Get connection string from Project's _Db.config file
+            ProjectDomain projectDomain = ProjectDomainHelper.ToProjectDomain(File.ReadAllText(projectPath + "\\_Db.config"));
+
             foreach (CommitItemDomain commitItem in request.CommitItems)
             {
                 string itemPath = projectPath + "\\" + commitItem.ItemType + "_" + commitItem.Name + ".txt";
                 string content = commitItem.CurrentDefinition;
-                //TODO if the ItemType is table, get the schema script
+                this.logDAL.InsertLog(commitItem.Name);
+                // If the ItemType is table, get the schema script
+                if (commitItem.ItemType == CommitItemDomain.ItemType_Table)
+                {
+                    logDAL.InsertLog("TABLE");
+                    // Get all tables
+                    IDbBAL dbBAL = new DbBAL();
+                    ListAllTablesRequest listAllTablesRequest = new ListAllTablesRequest();
+                    listAllTablesRequest.ProjectName = request.ProjectName;
+                    ListAllTablesResponse listAllTables = dbBAL.ListAllTables(listAllTablesRequest);
 
-                //TODO Function
+                    foreach(CommitItemDomain table in listAllTables.Tables)
+                    {
+                        if(table.Name == commitItem.Name)
+                        {
+                            content = table.CurrentDefinition;
+                            logDAL.InsertLog(content);
+                        }
+                    }
+                }
 
-                //TODO SP
+                // Function
+                DbObjectDAL dbObjectDAL = new DbObjectDAL(ProjectDomainHelper.ToConnectionString(projectDomain));
+                if (commitItem.ItemType == CommitItemDomain.ItemType_Function)
+                {
+                    // Get Function
+                    List<DbObject> functions = dbObjectDAL.GetDbObjectsByType(DbObject.Type_Function);
 
+                    foreach(DbObject function in functions)
+                    {
+                        if(function.Name == commitItem.Name)
+                        {
+                            content = function.Definition;
+                        }
+                    }
+                }
+
+                // SP
+                if (commitItem.ItemType == CommitItemDomain.ItemType_Stored_Procedure)
+                {
+                    // Get SP
+                    List<DbObject> storedProcedures = dbObjectDAL.GetDbObjectsByType(DbObject.Type_Stored_Procedure);
+                    foreach(DbObject sp in storedProcedures)
+                    {
+                        if(sp.Name == commitItem.Name)
+                        {
+                            content = sp.Definition;
+                        }
+                    }
+                }
+
+                this.logDAL.InsertLog(content);
                 commitMessage += "Commit " + commitItem.ItemType + ": " +commitItem.Name + "\n";
                 File.WriteAllText(itemPath, content);
             }
@@ -129,7 +180,15 @@ namespace BAL
             Signature author = new Signature(Properties.AuthorName, Properties.AuthorEmail, DateTime.Now);
             Signature committer = new Signature(Properties.CommitterName, Properties.CommitterEmail, DateTime.Now);
 
-            repo.Commit(commitMessage, author, committer);
+            try
+            {
+                repo.Commit(commitMessage, author, committer);
+            }
+            catch(Exception ex)
+            {
+                response.StatusCode = StatusCodes.Status_Error;
+                response.StatusMessage = ex.ToString();
+            }
 
             return response;
         }
@@ -163,6 +222,7 @@ namespace BAL
                         if (File.Exists(itemPath))
                         {
                             //
+                            commitItem.CommittedDefinition = File.ReadAllText(itemPath);
 
                             // Write create definition to the file
                             File.WriteAllText(itemPath, commitItem.CurrentDefinition + "\n");
@@ -205,6 +265,8 @@ namespace BAL
                         string itemPath = projectPath + "\\" + commitItem.GetCommitItemFileName();
                         if (File.Exists(itemPath))
                         {
+                            commitItem.CommittedDefinition = File.ReadAllText(itemPath);
+
                             // Write create definition to the file
                             File.WriteAllText(itemPath, commitItem.CurrentDefinition + "\n");
 
@@ -244,6 +306,8 @@ namespace BAL
                         string itemPath = projectPath + "\\" + commitItem.GetCommitItemFileName();
                         if (File.Exists(itemPath))
                         {
+                            commitItem.CommittedDefinition = File.ReadAllText(itemPath);
+
                             // Write create definition to the file
                             File.WriteAllText(itemPath, commitItem.CurrentDefinition + "\n");
 

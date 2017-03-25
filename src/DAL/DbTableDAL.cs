@@ -16,15 +16,18 @@ namespace DAL
     public class DbTableDAL
     {
         public string connectionString;
+        public LogDAL logDAL;
 
         public DbTableDAL()
         {
             this.connectionString = ConfigurationManager.ConnectionStrings["GitDB"].ConnectionString;
+            this.logDAL = new LogDAL();
         }
 
         public DbTableDAL(string ConnectionString)
         {
             this.connectionString = ConnectionString;
+            this.logDAL = new LogDAL();
         }
 
         public List<DbTable> GetTables()
@@ -46,8 +49,9 @@ namespace DAL
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                logDAL.InsertLog(ex.ToString());
             }
             finally
             {

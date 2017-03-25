@@ -18,10 +18,12 @@ namespace BAL
     public class DbBAL : IDbBAL
     {
         public string ProjectBasePath;
+        private LogDAL logDAL;
 
         public DbBAL()
         {
             this.ProjectBasePath = ConfigurationManager.AppSettings["RepoBasePath"];
+            this.logDAL = new LogDAL();
         }
 
         public ListAllTablesResponse ListAllTables(ListAllTablesRequest request)
@@ -36,6 +38,7 @@ namespace BAL
                 ProjectDomain projectDomain = ProjectDomainHelper.ToProjectDomain(File.ReadAllText(projectPath + "\\_Db.config"));
 
                 DbTableDAL tableDAL = new DbTableDAL(ProjectDomainHelper.ToConnectionString(projectDomain));
+                this.logDAL.InsertLog(ProjectDomainHelper.ToConnectionString(projectDomain));
                 List<DbTable> tables = tableDAL.GetTables();
                 response.Tables = new List<CommitItemDomain>();
                 foreach (DbTable table in tables)
