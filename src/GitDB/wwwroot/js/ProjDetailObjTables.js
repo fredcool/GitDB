@@ -3,11 +3,11 @@ import { Table, Column, Cell } from 'fixed-data-table';
 //import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
 
 
-const LinkCell = ({rowIndex, name, handleClick, ...props}) => {
+const LinkCell = ({rowIndex, name, type, handleClick, ...props}) => {
   let str = name[rowIndex];
   return (
       <Cell {...props}>
-        {str}
+        <a href="#" onClick={handleClick.bind(this,str,type)}>{str}</a>
       </Cell>
   );
 };
@@ -42,7 +42,8 @@ export default class ProjDetailObjTables extends React.Component {
           <Column
             header={<Cell>Tables</Cell>}
             cell={<LinkCell name={tableNameList}
-                            func={this.props.handleClick} />}
+                            type="tables"
+                            handleClick={this.props.handleClick} />}
             fixed={true}
             width={300}/>
         </Table>
@@ -56,7 +57,8 @@ export default class ProjDetailObjTables extends React.Component {
           <Column
             header={<Cell>Stored Procedures</Cell>}
             cell={<LinkCell name={spNameList}
-                            func={this.props.handleClick} />}
+                            type="sp"
+                            handleClick={this.props.handleClick} />}
             fixed={true}
             width={300}/>
         </Table>
@@ -70,7 +72,8 @@ export default class ProjDetailObjTables extends React.Component {
           <Column
             header={<Cell>Functions</Cell>}
             cell={<LinkCell name={funcNameList}
-                            func={this.props.handleClick} />}
+                            type="func"
+                            handleClick={this.props.handleClick} />}
             fixed={true}
             width={300}/>
         </Table>
@@ -80,11 +83,11 @@ export default class ProjDetailObjTables extends React.Component {
 }
 
 ProjDetailObjTables.propTypes = {
-  data: React.PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
   objId: React.PropTypes.number,
   objType: React.PropTypes.string,
   objName: React.PropTypes.string,
-  handleClick: React.PropTypes.func
+  handleClick: PropTypes.func
 }
 
 ProjDetailObjTables.defaultProps = {

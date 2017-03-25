@@ -40,9 +40,9 @@ class ProjListTable extends React.Component {
   }
 
   handleClick(projname) {
-    console.log("ProjectName Here!");
+    //console.log("ProjectName Here!");
     let requestdata = projname;
-    console.log(requestdata);
+    //console.log(requestdata);
 
     this.props.actions.loadProjectDetail(requestdata);
     console.log("User clicks a table!");

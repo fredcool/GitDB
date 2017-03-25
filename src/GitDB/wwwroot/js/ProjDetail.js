@@ -11,21 +11,54 @@ class ProjDetail extends React.Component {
     this.state = {
       tableItems: this.props.tableItems,
       spItems: this.props.spItems,
-      funcItems: this.props.funcItems
+      funcItems: this.props.funcItems,
+      scriptdata: this.props.scriptdata
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
+  handleClick(itemName, type) {
     console.log("Click in ProjDetail");
-
+    console.log(itemName);
+    console.log(type);
+    switch(type) {
+      case "tables":
+        this.state.tableItems.forEach(item => {
+          if(item.Name === itemName) {
+            let scriptObj = { workingcopy: item.CurrentDefinition,
+                              committedfile: item.CommittedDefinition };
+            this.setState({ scriptdata: scriptObj });
+          }
+        });
+            break;
+      case "sp":
+        this.state.spItems.forEach(item => {
+          if(item.Name === itemName) {
+            let scriptObj = { workingcopy: item.CurrentDefinition,
+                              committedfile: item.CommittedDefinition };
+            this.setState({ scriptdata: scriptObj });
+          }
+        });
+            break;
+      case "func":
+        this.state.funcItems.forEach(item => {
+          if(item.Name === itemName) {
+            let scriptObj = { workingcopy: item.CurrentDefinition,
+                              committedfile: item.CommittedDefinition };
+            this.setState({ scriptdata: scriptObj });
+          }
+        });
+            break;
+      default:
+        console.log("Sorry No Data");
+    }
   }
+
 
   componentWillReceiveProps(nextProps) {
     console.log("[Component Will Receive Props]");
     console.log(nextProps);
-    //const data = nextProps.projectdetail.TableItems;
-    //console.log(data);
+
     this.setState({tableItems: nextProps.tableItems,
                    spItems: nextProps.spItems,
                    funcItems: nextProps.funcItems});
@@ -39,11 +72,7 @@ class ProjDetail extends React.Component {
   render() {
     //const datago = this.state;
     console.log("About to render");
-    //console.log(datago);
-    /*const store = configureStore();
-    let unsubscribe = store.subscribe(() =>
-      console.log(store.getState())
-    )*/
+    console.log(this.state.scriptdata);
 
     return (
       <Grid>
@@ -57,6 +86,7 @@ class ProjDetail extends React.Component {
               <ControlLabel>Working Copy</ControlLabel>
               <FormControl componentClass="textarea" placeholder="textarea" />
             </FormGroup>
+            <pre>{this.state.scriptdata.workingcopy}</pre>
           </Col>
 
           <Col lg={4}>
@@ -64,6 +94,7 @@ class ProjDetail extends React.Component {
               <ControlLabel>Committed File</ControlLabel>
               <FormControl componentClass="textarea" placeholder="textarea" />
             </FormGroup>
+            <pre>{this.state.scriptdata.committedfile}</pre>
           </Col>
         </Row>
       </Grid>
@@ -94,6 +125,7 @@ ProjDetail.defaultProps = {
   tableItems: [],
   spItems:[],
   funcItems:[],
+  scriptdata: {workingcopy: "", committedfile: ""}
 };
 
 

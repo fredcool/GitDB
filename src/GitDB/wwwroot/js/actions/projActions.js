@@ -4,7 +4,7 @@ import projApi from '../client/GetAllProject';
 
 export function loadProjectsSuccess(projs) {
   console.log("Load Success!");
-  console.log(projs); // array of all projects
+  //console.log(projs); // array of all projects
   return {type: types.LOAD_PROJS_SUCCESS, projs};
 }
 
