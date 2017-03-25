@@ -12,9 +12,9 @@ const prodProjDetailUrl = "projdetail";
 
 export default (
   <Route>
-    <Route path={baseUrl} component={App}>
+    <Route path={url.baseUrl} component={App}>
       <IndexRoute component={ProjListTable} />
-      <Route path={projDetailUrl} component={ProjDetail} />
+      <Route path={url.projDetailUrl} component={ProjDetail} />
     </Route>
     <Route>
       <Route path={prodBaseUrl} component={App}>
@@ -22,10 +22,5 @@ export default (
       </Route>
       <Route path={prodProjDetailUrl} component={ProjDetail} />
     </Route>
-  </Route>
-export default (
-  <Route path={url.baseUrl} component={App}>
-    <IndexRoute component={ProjListTable} />
-    <Route path={url.projDetailUrl} component={ProjDetail} />
   </Route>
 );
