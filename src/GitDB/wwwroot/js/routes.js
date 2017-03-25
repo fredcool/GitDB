@@ -5,12 +5,11 @@ import App from './app';
 import ProjListTable from './ProjListTable';
 import ProjDetail from './ProjDetail';
 
-const baseUrl = "/src/GitDB/wwwroot/";
-const projDetailUrl = baseUrl + "projdetail";
+import * as url from './baseUrl';
 
-export default (  
-  <Route path={baseUrl} component={App}>
+export default (
+  <Route path={url.baseUrl} component={App}>
     <IndexRoute component={ProjListTable} />
-    <Route path={projDetailUrl} component={ProjDetail} />
+    <Route path={url.projDetailUrl} component={ProjDetail} />
   </Route>
 );
