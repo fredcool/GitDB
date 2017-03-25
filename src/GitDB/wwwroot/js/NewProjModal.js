@@ -20,16 +20,16 @@ class NewProjModal extends React.Component {
   }
 
   save() {
-    //let data = "shine";
     let userinput = { projname: this.state.projname,
                       host: this.state.host,
                       username: this.state.username,
                       password: this.state.password,
                       dbname: this.state.dbname };
-    console.log(userinput);
 
     this.props.actions.createProject(userinput);
+    //this.props.actions.loadProjects();
     this.close();
+    //TO DO: refresh project list page after save
   }
 
   close() {
