@@ -5,18 +5,17 @@ import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
 import {connect} from 'react-redux';
 import NewProjModal from './NewProjModal'; 
 import {bindActionCreators} from 'redux';  
-import * as projActions from './actions/projActions'; 
+import * as projActions from './actions/projActions';
+import * as url from './baseUrl';
 
 
 import 'fixed-data-table/dist/fixed-data-table.min.css';
 
 //LinkCell is a functional object
 const LinkCell = ({rowIndex, data, handleClick, ...props}) => {
-  const baseUrl = "/src/GitDB/wwwroot/";
-  const projDetailUrl = baseUrl + "projdetail";
   let str = data[rowIndex];
   return (
-    <Link to={projDetailUrl} onClick={handleClick.bind(this,str)}>
+    <Link to={url.projDetailUrl} onClick={handleClick.bind(this,str)}>
       <Cell {...props}>
         {str}
       </Cell>

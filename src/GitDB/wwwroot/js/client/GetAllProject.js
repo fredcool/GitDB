@@ -27,11 +27,11 @@ export default {
   createProject: function(data) {
     let baseurl = "http://34.208.160.108/WebService/Project/CreateProject?ProjectName=" + data.projname;
     let moreparam = "&Host=" + data.host + "&Username=" + data.username
-                    + "&Passward=" + data.passward + "&Database="
+                    + "&Password=" + data.password + "&Database="
                     + data.dbname ;
 
     let url = baseurl + moreparam;
-    console.log(url);
+    //console.log(url);
 
     return axios.post(url)
       .then(response => {
