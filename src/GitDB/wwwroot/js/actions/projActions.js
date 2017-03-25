@@ -10,7 +10,7 @@ export function loadProjectsSuccess(projs) {
 
 export function loadProjectDetailSuccess(details) {
   console.log("Project Detail Load Success!");
-  console.log(details); // array of all projects
+  console.log(details); // array of all details
   return {type: types.LOAD_PROJ_DETAIL_SUCCESS, details};
 }
 
