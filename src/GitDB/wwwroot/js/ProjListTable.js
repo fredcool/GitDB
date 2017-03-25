@@ -3,10 +3,10 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import {Link} from 'react-router';
 import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
 import {connect} from 'react-redux';
-import projApi from './client/GetAllProject';
-import NewProjModal from './NewProjModal';
-import configureStore from './store/configureStore';  
-import {loadProjectDetail} from './actions/projActions';
+import NewProjModal from './NewProjModal'; 
+import {bindActionCreators} from 'redux';  
+import * as projActions from './actions/projActions'; 
+
 
 import 'fixed-data-table/dist/fixed-data-table.min.css';
 
@@ -34,16 +34,15 @@ class ProjListTable extends React.Component {
   constructor(props) {
     super(props);
 
-    //this.handleClick = this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(projname) {
-    const store = configureStore();
-    console.log("ProjectName Here!");
+    //console.log("ProjectName Here!");
     let requestdata = projname;
-    console.log(requestdata);
+    //console.log(requestdata);
 
-    store.dispatch(loadProjectDetail(requestdata));
+    this.props.actions.loadProjectDetail(requestdata);
     console.log("User clicks a table!");
   }
 
@@ -52,6 +51,8 @@ class ProjListTable extends React.Component {
     const projNameList = data.map( d => d.ProjectName );
     const dbList = data.map( d => d.Database );
     const hostList = data.map( d => d.Host);
+    console.log("Show Actions: ");
+    console.log(this.props.actions);
 
     return (
       <div>
@@ -88,6 +89,12 @@ class ProjListTable extends React.Component {
 
 }
 
+function mapDispatchToProps(dispatch) {  
+  return {
+    actions: bindActionCreators(projActions, dispatch)
+  };
+}
+
 function mapStateToProps(state, ownProps) {
   console.log("Maping State");
   console.log(state);
@@ -97,7 +104,8 @@ function mapStateToProps(state, ownProps) {
 }
 
 ProjListTable.propTypes = {
-  projects: PropTypes.object
+  projects: PropTypes.object,
+  actions: PropTypes.object.isRequired
 }
 
-export default connect(mapStateToProps)(ProjListTable);  
+export default connect(mapStateToProps, mapDispatchToProps)(ProjListTable);  

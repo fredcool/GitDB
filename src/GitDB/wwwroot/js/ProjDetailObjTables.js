@@ -3,50 +3,77 @@ import { Table, Column, Cell } from 'fixed-data-table';
 //import FakeObjectDataListStore from './helpers/FakeObjectDataListStore';
 
 
-const LinkCell = ({rowIndex, type, name, func, ...props}) => (
-    <Cell {...props}>
-      <a href="#" onClick={func}>{name}</a>
-    </Cell>
-);
+const LinkCell = ({rowIndex, name, type, handleClick, ...props}) => {
+  let str = name[rowIndex];
+  return (
+      <Cell {...props}>
+        <a href="#" onClick={handleClick.bind(this,str,type)}>{str}</a>
+      </Cell>
+  );
+};
 
 export default class ProjDetailObjTables extends React.Component {
   constructor(props) {
     super(props);
 
-    /*this.state = {
-      dataList: new FakeObjectDataListStore(1000000),
-    };*/
   }
 
   render() {
     //var {dataList} = this.state;
+    const tableItems = this.props.data.tableItems;
+    const tableNameList = tableItems.map( item => item.Name )
+    const spItems = this.props.data.spItems;
+    const spNameList = spItems.map( item => item.Name )
+    const funcItems = this.props.data.funcItems;
+    const funcNameList = funcItems.map( item => item.Name )
+
+    //console.log(tableNameList);
+
+
     return (
       <div>
         <h4>Database Objects</h4>
         <Table
-        rowsCount={5}
+        rowsCount={tableNameList.length}
         rowHeight={40}
         headerHeight={50}
         width={300}
         height={200}>
           <Column
             header={<Cell>Tables</Cell>}
-            cell={<LinkCell type={this.props.objType}
-                            name={this.props.objName}
-                            func={this.props.handleClick} />}
+            cell={<LinkCell name={tableNameList}
+                            type="tables"
+                            handleClick={this.props.handleClick} />}
             fixed={true}
             width={300}/>
         </Table>
         <br/>
         <Table
-        rowsCount={5}
+        rowsCount={spNameList.length}
         rowHeight={40}
         headerHeight={50}
         width={300}
         height={200}>
           <Column
-            header={<Cell>Stored Procedure</Cell>}
-            cell={<Cell>fred_test</Cell>}
+            header={<Cell>Stored Procedures</Cell>}
+            cell={<LinkCell name={spNameList}
+                            type="sp"
+                            handleClick={this.props.handleClick} />}
+            fixed={true}
+            width={300}/>
+        </Table>
+        <br/>
+        <Table
+        rowsCount={funcNameList.length}
+        rowHeight={40}
+        headerHeight={50}
+        width={300}
+        height={200}>
+          <Column
+            header={<Cell>Functions</Cell>}
+            cell={<LinkCell name={funcNameList}
+                            type="func"
+                            handleClick={this.props.handleClick} />}
             fixed={true}
             width={300}/>
         </Table>
@@ -56,10 +83,11 @@ export default class ProjDetailObjTables extends React.Component {
 }
 
 ProjDetailObjTables.propTypes = {
+  data: PropTypes.object.isRequired,
   objId: React.PropTypes.number,
   objType: React.PropTypes.string,
   objName: React.PropTypes.string,
-  handleClick: React.PropTypes.func
+  handleClick: PropTypes.func
 }
 
 ProjDetailObjTables.defaultProps = {
