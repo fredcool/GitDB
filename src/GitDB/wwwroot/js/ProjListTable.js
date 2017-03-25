@@ -71,13 +71,13 @@ class ProjListTable extends React.Component {
             width={280}
           />
           <Column
-            header={<Cell>Database</Cell>}
+            header={<Cell>Database Name</Cell>}
             cell={<TextCell data={dbList} />}
             fixed={true}
             width={260}
           />
           <Column
-            header={<Cell>GitHub URL</Cell>}
+            header={<Cell>Database Host</Cell>}
             cell={<TextCell data={hostList} />}
             fixed={true}
             width={400}

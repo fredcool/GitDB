@@ -9,7 +9,7 @@ export default class Header extends React.Component {
     const baseUrl = "/src/GitDB/wwwroot/";
     
     return (
-      <div className="container">
+      <div className="container-fluid">
         <IndexLink to={baseUrl} 
           activeClassName="active">
           <PageHeader>GitDB <small> @ITU</small></PageHeader>
