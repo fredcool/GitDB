@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';  
 import {connect} from 'react-redux';
 import { Grid, Row, Col, FormGroup,
-         FormControl, ControlLabel } from 'react-bootstrap';
+         FormControl, ControlLabel,
+         Button, ButtonToolbar, Label } from 'react-bootstrap';
 import ProjDetailObjTables from './ProjDetailObjTables';
 import configureStore from './store/configureStore'; 
 
@@ -65,35 +66,36 @@ class ProjDetail extends React.Component {
   }
 
   componentDidMount() {
-    //console.log("componentDidMount");
-    //this.setState ({data: this.props.data});
+
   }
 
   render() {
-    //const datago = this.state;
     console.log("About to render");
     console.log(this.state.scriptdata);
 
     return (
       <Grid>
         <Row className="show-grid">
+          <ButtonToolbar>
+            <Button bsStyle="info">Commit Change</Button>
+            <Button bsStyle="info">Git Diff</Button>
+          </ButtonToolbar>
+        </Row>
+        <Row className="show-grid">
           <Col lg={4}>
             <ProjDetailObjTables data={this.state} handleClick={this.handleClick}/>
           </Col>
 
           <Col lg={4}>
+            <h3><Label>Working Copy</Label></h3>
             <FormGroup controlId="formControlsTextarea">
-              <ControlLabel>Working Copy</ControlLabel>
               <FormControl componentClass="textarea" placeholder="textarea" />
             </FormGroup>
             <pre>{this.state.scriptdata.workingcopy}</pre>
           </Col>
 
           <Col lg={4}>
-            <FormGroup controlId="formControlsTextarea">
-              <ControlLabel>Committed File</ControlLabel>
-              <FormControl componentClass="textarea" placeholder="textarea" />
-            </FormGroup>
+            <h3><Label>Committed File</Label></h3>
             <pre>{this.state.scriptdata.committedfile}</pre>
           </Col>
         </Row>
