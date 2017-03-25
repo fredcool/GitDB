@@ -1,10 +1,11 @@
 import React, {PropTypes} from 'react';  
-import {connect} from 'react-redux';
 import { Grid, Row, Col, FormGroup,
          FormControl, ControlLabel,
          Button, ButtonToolbar, Label } from 'react-bootstrap';
 import ProjDetailObjTables from './ProjDetailObjTables';
-import configureStore from './store/configureStore'; 
+import {bindActionCreators} from 'redux';
+import * as projActions from './actions/projActions';
+import {connect} from 'react-redux';
 
 class ProjDetail extends React.Component {
   constructor(props) {
@@ -13,9 +14,15 @@ class ProjDetail extends React.Component {
       tableItems: this.props.tableItems,
       spItems: this.props.spItems,
       funcItems: this.props.funcItems,
-      scriptdata: this.props.scriptdata
+      scriptdata: this.props.scriptdata,
+      currentProj: this.props.currentProj,
+      changedscript: '',
+      currentItemName: '',
+      currentItemType: '',
     };
     this.handleClick = this.handleClick.bind(this);
+    this.commitChange = this.commitChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick(itemName, type) {
@@ -28,7 +35,9 @@ class ProjDetail extends React.Component {
           if(item.Name === itemName) {
             let scriptObj = { workingcopy: item.CurrentDefinition,
                               committedfile: item.CommittedDefinition };
-            this.setState({ scriptdata: scriptObj });
+            this.setState({ scriptdata: scriptObj,
+                            currentItemName: itemName,
+                            currentItemType: "TABLE" });
           }
         });
             break;
@@ -37,7 +46,9 @@ class ProjDetail extends React.Component {
           if(item.Name === itemName) {
             let scriptObj = { workingcopy: item.CurrentDefinition,
                               committedfile: item.CommittedDefinition };
-            this.setState({ scriptdata: scriptObj });
+            this.setState({ scriptdata: scriptObj,
+                            currentItemName: itemName,
+                            currentItemType: "FUNCTIONS"  });
           }
         });
             break;
@@ -46,7 +57,9 @@ class ProjDetail extends React.Component {
           if(item.Name === itemName) {
             let scriptObj = { workingcopy: item.CurrentDefinition,
                               committedfile: item.CommittedDefinition };
-            this.setState({ scriptdata: scriptObj });
+            this.setState({ scriptdata: scriptObj,
+                            currentItemName: itemName,
+                            currentItemType: "FUNCTIONS"  });
           }
         });
             break;
@@ -55,6 +68,22 @@ class ProjDetail extends React.Component {
     }
   }
 
+  handleChange(event) {
+    this.setState({changedscript: event.target.value});
+  }
+
+  //TO DO: get project name
+  commitChange() {
+    let requestdata = { projname: this.state.currentProj,
+                        commitmsg: 'Default',
+                        itemtype: this.state.currentItemType,
+                        itemname: this.state.currentItemName,
+                        changedscript: this.state.changedscript };
+    console.log(requestdata);
+
+    //BUG: projname
+    this.props.actions.commitChange(requestdata);
+  }
 
   componentWillReceiveProps(nextProps) {
     console.log("[Component Will Receive Props]");
@@ -77,7 +106,7 @@ class ProjDetail extends React.Component {
       <Grid>
         <Row className="show-grid">
           <ButtonToolbar>
-            <Button bsStyle="info">Commit Change</Button>
+            <Button bsStyle="info" onClick={this.commitChange}>Commit Change</Button>
             <Button bsStyle="info">Git Log</Button>
           </ButtonToolbar>
         </Row>
@@ -89,7 +118,10 @@ class ProjDetail extends React.Component {
           <Col lg={4}>
             <h3><Label>Working Copy</Label></h3>
             <FormGroup controlId="formControlsTextarea">
-              <FormControl componentClass="textarea" placeholder="textarea" />
+              <FormControl componentClass="textarea" 
+                           placeholder="Please edit your script here before commit."
+                           value={this.state.changedscript}
+                           onChange={this.handleChange} />
             </FormGroup>
             <pre>{this.state.scriptdata.workingcopy}</pre>
           </Col>
@@ -105,17 +137,25 @@ class ProjDetail extends React.Component {
 
 }
 
+function mapDispatchToProps(dispatch) {  
+  return {
+    actions: bindActionCreators(projActions, dispatch)
+  };
+}
+
 function mapStateToProps(state, ownProps) {
   console.log("Maping State For ProjDetail");
   console.log(state);
   const tableItems = Object.assign([], state.projdetail.TableItems)
   const spItems = Object.assign([], state.projdetail.StoredProcedureItems)
   const funcItems = Object.assign([], state.projdetail.FunctionItems)
+  const projName = state.projdetail.currentproj;
 
   return {
     tableItems: tableItems,
     spItems: spItems,
-    funcItems: funcItems
+    funcItems: funcItems,
+    currentProj: projName
   }
 }
 
@@ -127,8 +167,9 @@ ProjDetail.defaultProps = {
   tableItems: [],
   spItems:[],
   funcItems:[],
-  scriptdata: {workingcopy: "", committedfile: ""}
+  scriptdata: {workingcopy: "", committedfile: ""},
+  currentProj: ""
 };
 
 
-export default connect(mapStateToProps)(ProjDetail); 
+export default connect(mapStateToProps, mapDispatchToProps)(ProjDetail);

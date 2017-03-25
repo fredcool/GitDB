@@ -6,12 +6,12 @@ export default function projDetailReducer(state = initialState.Details,
   switch(action.type) {
     case types.LOAD_PROJ_DETAIL_SUCCESS:
       console.log("In projDetailReducer");
-      //console.log(action.details);
       console.log(state);
       let newState = action.details;
+      newState.currentproj = action.currentproj;
       console.log(newState);
-      let cathy = Object.assign({}, state, newState);
-      console.log(cathy);
+      //console.log(action.currentproj)
+
       return Object.assign({}, state, newState)
     default: 
       return state;

@@ -40,6 +40,24 @@ export default {
         console.log(error.message);
         return error;
       });
+  },
+
+  commitChange: function(data) {
+    let baseurl = "http://34.208.160.108/WebService/Project/CommitItem?ProjectName=" + data.projname;
+    let moreparam = "&CommitMessage=" + data.commitmsg 
+                    + "&ItemType=" + data.itemtype
+                    + "&Name=" + data.itemname + "&CurrentDefinition="
+                    + data.changedscript ;
+
+    let url = baseurl + moreparam;
+
+    return axios.post(url)
+      .then(response => {
+        return response.data;
+      }).catch(error => {
+        console.log(error.message);
+        return error;
+      });
   }
 
 }
