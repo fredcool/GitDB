@@ -1,22 +1,33 @@
-header {background-color:#7FD4FF; font-family: verdana; font-size:15pt; display:inline-block;}
+header {/*background-color:#7FD4FF;*/ font-family: verdana; font-size:15pt; padding-top: 10px; padding-bottom: 10px; background-color: rgba(255, 255, 255, 0.9);}
 body {}
-hr {border:1px solid blue; hieght: 2px; background-color:blue;}
-.article2 {background-color:#55FF7F; font-family: Times new roman; font-size:13pt; background: url(Background.jpg) no-repeat;}
-.article1 {background-color:#D4AAFF; font-family: Times new roman; font-size:13pt; background: url(Flower Pink Background Vector Art.jpg) no-repeat;}
+.article2 {background-color:#55FF7F; font-family: Times new roman; font-size:13pt; background: url('Background.jpg') no-repeat;}
+.article1 {background-color:#D4AAFF; font-family: Times new roman; font-size:13pt; background: url('Flower Pink Background Vector Art.jpg') no-repeat;}
 footer {font-size:10pt; text-align:center; font-weight:700; color:#007FFF;}
 .login {position:absolute; left:92%; bottom:46%;}
 .registration {position:absolute; right:10%; top:.70%;}
 #container { display: -webkit-flex; display: flex; flex-flow: column wrap;}
+.carousel-inner 
+{
+    max-height: 500px;
+}
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {width: 80%; margin: auto;}
-.howitwork {font-family: arial, times new roman; font-size:22pt; color:#D455FF; font-weight:bold; text-align:center;}
-#howitwork {font-family: arial; font-size:18pt; color:#5555FF; font-weight: 700; text-align:justify;}
+.howitwork {/*font-family: arial, times new roman;*/ font-size:22pt; /*color:#D455FF;*/ font-weight:bold; text-align:center;}
+#howitwork {/*font-family: arial; font-size:18pt;*/ /*color:#5555FF;*/ /*font-weight: 700;*/ text-align:justify;}
 .further {font-family: lucida handwriting; font-size:18pt; color:#55AAFF; font-weight: 700; text-align:center;}
 .features {text-align:justify; font-family:arial; margin:5%; color: #55AAFF; font-size: 16pt; font-weight: 400; -webkit-column-count: 3; /* Chrome, Safari, Opera */-moz-column-count: 3; /* Firefox */column-count: 3; -webkit-column-gap: 167px; /* Chrome, Safari, Opera */-moz-column-gap: 167px; /* Firefox */column-gap: 167px;}
 #title {color: blue; font-weight: 700; font-size:22pt;}
 nav {text-align:center;}
-footer {background-color:#7FD4FF; font-family: verdana; font-size:15pt; display:inline-block;}
-a {text-decoration:none; font-size:12pt; color:#F547B1; font-family:Times New Roman;}
-a:visited {color:#F547B1;}
+nav a 
+{
+    display: inline-block;
+}
+footer nav a 
+{
+    color: #ffffff !important;
+}
+footer {background-color:#000000; /*font-family: verdana;*/ font-size:15pt; display:inline-block;}
+a {text-decoration:none; font-size:12pt;}
+/*a:visited {color:#F547B1;}*/
 a:hover {color:red;}
 .copy {font-size:10pt; text-align:center; color:#FFFFFF;}

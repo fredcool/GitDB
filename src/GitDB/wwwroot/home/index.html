@@ -1,112 +1,42 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>gitproject</title>
+    <title>GitDB</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/new.css" media="screen">
     <link rel="stylesheet" href="css/slick.css?v=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
 </head>
 <body>
     <header>
-        <div class="row header" id="container">
-            <div class="col-md-12 col-sm-8 col-xs-8">
-                <a href="./"><img src="resource/logo2T.png" /></a>
+        <div class="header container-fluid">
+            <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-2">
+                <a href="index.html"><img src="resource/logo2T.png" /></a>
+            </div>
+            <div class="col-md-8">
                 <nav>
-                    <a href="index.html" title="Home">Home</a>&nbsp &nbsp
-                    <a href="" title="About us">About Us</a>&nbsp &nbsp
-                    <a href="" title="Contact us">Contact Us</a> &nbsp &nbsp
-                    <a href="" title="News">What's New!</a>
+                    <a href="#section_header" title="Home">Home</a>
+                    <a href="#section_howitworks">How it works</a>
+                    <a href="#section_aboutus" title="About us">About Us</a>
+                    <a href="#section_contactus" title="Contact us">Contact Us</a>
+                    <a href="#section_new" title="News">What's New!</a>
                 </nav>
+            </div>
+            <div class="col-md-2">
                 <div class="registration">
-                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Register</button>
+                    <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">Register</button>
                     <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#mylogin">Login</button>
                 </div>
-                <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Enter Your Registration Details</h4>
-                            </div>
-                            <div class="modal-body">
-                                <label for="myname">Name:</label>
-                                <input type="text" name="myname" id="myname"><br><br>
-                                <label for="myemail">User Name:</label>
-                                <input type="email" name="myEmail1" id="myEmail1"><br><br>
-                                <label for="mypassword">Password:</label>
-                                <input type="password" name="myPassword1" id="myPassword1"><br><br>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="reset" class="reset1" name="ResetButton" value="Reset">Reset</button>
-                                <button type="button" class="registerinButton" data-toggle="modal" data-target="#myregistration">Register</button>
-                                </span>
-                                <div class="modal fade" id="myregistration" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title1">Your Registation Status</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div id="registerinSuccess" class="collapse">
-                                                    You have been Registered Successfully!
-                                                </div>
-                                                <div id="registerinFailed" class="collapse">
-                                                    Registration Failed!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="modal fade" id="mylogin" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title1">Enter Your loggin Details</h4>
-                            </div>
-                            <div class="modal-body">
-                                <label for="myemail">Email:</label>
-                                <input type="email" name="myEmail" id="myEmail"><br><br>
-                                <label for="mypassword">Password:</label>
-                                <input type="password" name="myPassword" id="myPassword"><br><br>
-                            </div>
-                            <div class="modal-footer1">
-                                <button type="reset" class="reset" name="ResetButton" value="Reset">Reset</button>
-                                <button type="button" class="loginButton" data-toggle="modal" data-target="#mysubmit">Submit</button>
-                                </span>
-                                <div class="modal fade" id="mysubmit" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title1">Enter Your loggin Details</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div id="loginSuccess" class="collapse">
-                                                    You have logged in Successfully!
-                                                </div>
-                                                <div id="loginFailed" class="collapse">
-                                                    Login Failed!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+            </div>
             </div>
     </header>
     <section>
@@ -121,28 +51,24 @@
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
-
                     <div class="item active">
-                        <img src="resource/project.jpg" alt="Create Project" style="width:90%; height:45%">
+                        <img src="resource/project.jpg" alt="Create Project" style="width:100%">
                         <div class="carousel-caption">
                             <h1>CREATE YOUR OWN PROJECT</h1>
                         </div>
                     </div>
-
                     <div class="item">
-                        <img src="resource/monitor.png" alt="monitor" style="width:90%; height:45%;">
+                        <img src="resource/monitor.png" alt="monitor" style="width:100%">
                         <div class="carousel-caption">
                             <h1>MONITOR WORK DONE BY OTHERS ON THE PROJECT</h1>
                         </div>
                     </div>
-
                     <div class="item">
-                        <img src="resource/controlandmanage.jpg" alt="Flower" style="width:90%; height:45%">
+                        <img src="resource/controlandmanage.jpg" alt="Flower" style="width:100%">
                         <div class="carousel-caption">
                             <h1>THREBY CONTROL AND MANAGE YOUR PROJECT</h1>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- Left and right controls -->
@@ -157,50 +83,63 @@
             </div>
         </article>
         <br />
-        <article>
+        <article id="section_howitworks">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-xs-12 col-md-offset-2 col-md-8">
                         <div class="howitwork">HOW IT WORKS?</div>
                         <p id="howitwork">
                             We provide a ready to use schema, database, tables, scripts, etc for designing a project. When the project is being design a <b>git log</b> file will be created which will be having log of every change made in the project from the time the project begins. User can hence monitor the changes made in the project and thereby manage the project.<div class="further"> Further it is here ....</div>
                         </p>
                     </div>
-                    <div class="row">
-                        <div></div>
-                        <img src="resource/createproject.jpg" class="img-circle" alt="Create Project" width="304" height="236" style="border: 2px solid black"> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <img src="resource/monitor.jpg" class="img-circle" alt="Monitor Project" width="304" height="236" style="border: 2px solid black; border-shadow: 1px 2px 3px"> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                        <img src="resource/control-5.jpg" class="img-circle" alt="Control Project" width="304" height="236" style="border: 2px solid black">
-                        <br>
-                        <div class="features">
-                            <ul>
-                                <li>Get registered</li>
-                                <li>Login to your account</li>
-                                <li>Choose the predesigned Project Templates</li>
-                                <li>Choose Host link</li>
-                                <li>And you are good to go...<img src="resource/go.jpg" alt="go" width="150" height="125"></li>
-                            </ul>
-                            <ul>
-                                <li><b>git init</b> is creates while creating a project</li>
-                                <li>Run unit test to check the scripts </li>
-                                <li>Check database log and commits by peers</li>
-                                <li>Check adding and deleting coloumns and tables </li>
-                                <li>Check stored procedures</li>
-                            </ul>
-                            <br>
-                            <ul>
-                                <li>Thereby Manage your Project</li>
-                                <li>Get <b>git diff</b></li>
-                                <li>
-                                    Also receive notification via email
-                                    <br>for all the changes being made in
-                                    <br>the project
-                                </li>
-                            </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div style="text-align:center;">
+                            <img src="resource/createproject.jpg" class="img-circle" alt="Create Project" style="width:250px; height:250px;">
                         </div>
+                        <ul>
+                            <li>Get registered</li>
+                            <li>Login to your account</li>
+                            <li>Choose the predesigned Project Templates</li>
+                            <li>Choose Host link</li>
+                            <li>And you are good to go...<img src="resource/go.jpg" alt="go" style="width:80px; height:80px;"></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <div style="text-align:center;">
+                            <img src="resource/monitor.jpg" class="img-circle" alt="Monitor Project" style="width:250px; height:250px;">
+                        </div>
+                        <ul>
+                            <li><b>git init</b> is creates while creating a project</li>
+                            <li>Run unit test to check the scripts </li>
+                            <li>Check database log and commits by peers</li>
+                            <li>Check adding and deleting coloumns and tables </li>
+                            <li>Check stored procedures</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <div style="text-align:center;">
+                            <img src="resource/control-5.jpg" class="img-circle" alt="Control Project" style="width:250px; height:250px;">
+                        </div>
+                        <ul>
+                            <li>Thereby Manage your Project</li>
+                            <li>Get <b>git diff</b></li>
+                            <li>
+                                Also receive notification via email
+                                <br>for all the changes being made in
+                                <br>the project
+                            </li>
+                        </ul>
+                    </div>
+                    <br>
+                    <div class="features">
                     </div>
                 </div>
             </div>
+        </article>
+        <article id="section_aboutus">
+
         </article>
         <footer>
             <nav>
@@ -212,5 +151,98 @@
             <div class="copy">&copy; 2017 Rinki Mirpuri</div>
         </footer>
     </section>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">User Registration</h4>
+                </div>
+                <div class="modal-body form-horizontal">
+                    <div class="form-group">
+                        <label for="myname" class="col-md-3">Name:</label>
+                        <input type="text" class="col-md-8" name="myname" id="myname">
+                    </div>
+                    <div class="form-group">
+                        <label for="myemail" class="col-md-3">User Name:</label>
+                        <input type="email" class="col-md-8" name="myEmail1" id="myEmail1">
+                    </div>
+                    <div class="form-group">
+                        <label for="mypassword" class="col-md-3">Password:</label>
+                        <input type="password" class="col-md-8" name="myPassword1" id="myPassword1">
+                    </div>
+                    <div class="alert alert-success hide" id="registrationStatus">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-warning reset1" name="ResetButton" value="Reset">Reset</button>
+                    <button type="button" class="btn btn-primary registerinButton">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myregistration" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title1">Your Registation Status</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="registerinSuccess" class="collapse">
+                        You have been Registered Successfully!
+                    </div>
+                    <div id="registerinFailed" class="collapse">
+                        Registration Failed!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="mylogin" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title1">User Login</h4>
+                </div>
+                <div class="modal-body form-horizontal">
+                    <div class="form-group">
+                        <label for="myemail" class="col-md-3">Email:</label>
+                        <input type="email" class="col-md-8" name="myEmail" id="myEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="mypassword" class="col-md-3">Password:</label>
+                        <input type="password" class="col-md-8" name="myPassword" id="myPassword">
+                    </div>
+                    <div class="alert alert-success hide" id="loginStatus">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-warning reset" name="ResetButton" value="Reset">Reset</button>
+                    <button type="button" class="btn btn-primary loginButton">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="mysubmit" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title1">Enter Your loggin Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="loginSuccess" class="collapse">
+                        You have logged in Successfully!
+                    </div>
+                    <div id="loginFailed" class="collapse">
+                        Login Failed!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
