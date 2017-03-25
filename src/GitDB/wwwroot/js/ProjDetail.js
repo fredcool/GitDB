@@ -118,8 +118,9 @@ class ProjDetail extends React.Component {
           <Col lg={4}>
             <h3><Label>Working Copy</Label></h3>
             <FormGroup controlId="formControlsTextarea">
-              <FormControl componentClass="textarea" 
+              <FormControl componentClass="textarea"
                            placeholder="Please edit your script here before commit."
+                           rows="5"
                            value={this.state.changedscript}
                            onChange={this.handleChange} />
             </FormGroup>
