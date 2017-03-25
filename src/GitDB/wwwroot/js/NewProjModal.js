@@ -1,6 +1,8 @@
 import React from 'react';
 import { Popover, Tooltip, Button, Modal, OverlayTrigger,
          Form, FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap';
+import configureStore from './store/configureStore';  
+import {createProject} from './actions/projActions';
 
 
 export default class NewProjModal extends React.Component {
@@ -19,7 +21,16 @@ export default class NewProjModal extends React.Component {
   }
 
   close() {
+    const store = configureStore();
+    let data = {'ProjectName': 'dsdfh',
+                'Host': '34.206.160.108',
+                'Username': 'GitDB',
+                'Password': 'GitDBAdmin',
+                'Database': 'GitDB'};
+    store.dispatch(createProject(data));
+
     this.setState({ showModal: false });
+
   }
 
   open() {

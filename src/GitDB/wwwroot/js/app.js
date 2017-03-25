@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import { Button } from 'react-bootstrap';
 import Header from './Header';
-import NewProjModal from './NewProjModal';
 import apitest from './client/apitest';
 //import fakeapi from './client/fakeapi';
 
@@ -17,8 +16,6 @@ export default class App extends React.Component {
         <Header />
         <br/>
         <div className="container">
-          <NewProjModal />
-          <br/>
           {this.props.children}
         </div>
       </div>
