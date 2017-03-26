@@ -33,6 +33,10 @@ class ProjListTable extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      projects: this.props.projects
+    };
+
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -44,10 +48,20 @@ class ProjListTable extends React.Component {
     this.props.actions.loadProjectDetail(requestdata);
     console.log("User clicks a table!");
   }
+
   componentWillReceiveProps(nextProps) {
     console.log("Proj List -[Component Will Receive Props]");
+    console.log(nextProps.projects);
+    this.setState({ projects: nextProps.projects });
   }
 
+  componentDidUpdate(prevProps, prevState){
+    console.log("See componentDidUpdate");
+    if(this.props.projects.projCreated){
+      console.log("yay");
+      this.props.actions.loadProjects();
+    }
+  }
 
   render() {
     const data = this.props.projects.projects;
@@ -102,7 +116,7 @@ function mapStateToProps(state) {
   console.log("Maping State");
   console.log(state);
   return {
-    projects: state
+    projects: state.projects
   }
 }
 

@@ -38,7 +38,7 @@ export default class GitLogModal extends React.Component {
           </Modal.Header>
 
           <Modal.Body>
-            {this.props.logdata}
+            <pre>{this.props.logdata}</pre>
           </Modal.Body>
 
           <Modal.Footer>

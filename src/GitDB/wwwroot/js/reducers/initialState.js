@@ -1,5 +1,8 @@
 export default {
-  Projects: [],
+  Projects: {
+    projects: [],
+    projCreated: false
+  },
   Details: {
     TableItems: [],
     StoredProcedureItems: [],
