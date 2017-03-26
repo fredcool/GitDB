@@ -26,7 +26,7 @@ namespace BAL
                 Port = 587,
                 UseDefaultCredentials = false,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                Credentials = new System.Net.NetworkCredential("myid@gmail.com", "mypassword"),
+                Credentials = new System.Net.NetworkCredential("gdbsyssprt@gmail.com", "Apple@334"),
                 EnableSsl = true,
                 Timeout = 10000
             };
