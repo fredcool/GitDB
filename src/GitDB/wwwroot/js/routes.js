@@ -16,8 +16,8 @@ export default (
       <IndexRoute component={ProjListTable} />
       <Route path={url.projDetailUrl} component={ProjDetail} />
     </Route>
-    <Route>
-      <Route path={prodBaseUrl} component={App}>
+    <Route component={App}>
+      <Route path={prodBaseUrl}>
         <IndexRoute component={ProjListTable} />
       </Route>
       <Route path={prodProjDetailUrl} component={ProjDetail} />
