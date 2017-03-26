@@ -54,7 +54,7 @@ class ProjDetail extends React.Component {
                               committedfile: item.CommittedDefinition };
             this.setState({ scriptdata: scriptObj,
                             currentItemName: itemName,
-                            currentItemType: "FUNCTIONS"  });
+                            currentItemType: "SP"  });
           }
         });
             break;
@@ -65,7 +65,7 @@ class ProjDetail extends React.Component {
                               committedfile: item.CommittedDefinition };
             this.setState({ scriptdata: scriptObj,
                             currentItemName: itemName,
-                            currentItemType: "FUNCTIONS"  });
+                            currentItemType: "FUNCTION"  });
           }
         });
             break;
@@ -88,7 +88,6 @@ class ProjDetail extends React.Component {
     console.log("Commit the current data: ");
     console.log(requestdata);
 
-    //BUG: projname
     this.props.actions.commitChange(requestdata);
   }
 
@@ -111,7 +110,7 @@ class ProjDetail extends React.Component {
   getGitLog() {
     let requestdata = { projname: this.state.currentproj };
     console.log("Show Project Name");
-    console.log(this.props.currentproj);
+    console.log(requestdata);
     this.props.actions.getGitLog(requestdata);
   }
 
