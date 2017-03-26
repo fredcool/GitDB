@@ -20,7 +20,8 @@ class ProjDetail extends React.Component {
       currentItemName: '',
       currentItemType: '',
       commitmsg:'',
-      commitSuccess: false
+      commitSuccess: false,
+      logdata: ''
     };
     this.handleClick = this.handleClick.bind(this);
     this.commitChange = this.commitChange.bind(this);
@@ -103,7 +104,8 @@ class ProjDetail extends React.Component {
                    currentProj: nextProps.currentProj,
                    commitSuccess: nextProps.commitSuccess,
                    scriptdata: nextProps.scriptdata,
-                   commitmsg: '' });
+                   commitmsg: '',
+                   logdata: nextProps.logdata });
   }
 
   getGitLog() {
@@ -130,7 +132,7 @@ class ProjDetail extends React.Component {
           <ButtonToolbar>
             <Button bsStyle="info" onClick={this.commitChange}>Commit Change</Button>
             <span>  </span>
-            <GitLogModal handleClick={this.getGitLog} />
+            <GitLogModal handleClick={this.getGitLog} logdata={this.state.logdata} />
           </ButtonToolbar>
         </Row>
         <Row className="show-grid">
@@ -177,14 +179,15 @@ function mapStateToProps(state) {
   const funcItems = Object.assign([], state.projdetail.FunctionItems)
   const projName = state.projdetail.currentproj;
   const commitSuccess = state.projdetail.commitSuccess;
+  const logdata = state.projdetail.logdata;
 
   return {
     tableItems: tableItems,
     spItems: spItems,
     funcItems: funcItems,
     currentProj: projName,
-    commitSuccess: commitSuccess
-
+    commitSuccess: commitSuccess,
+    logdata: logdata
   }
 }
 
@@ -198,7 +201,8 @@ ProjDetail.defaultProps = {
   funcItems:[],
   scriptdata: {workingcopy: "", committedfile: ""},
   currentProj: "",
-  commitSuccess: false
+  commitSuccess: false,
+  logdata: ""
 };
 
 

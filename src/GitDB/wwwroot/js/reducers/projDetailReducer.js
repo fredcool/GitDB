@@ -17,11 +17,11 @@ export default function projDetailReducer(state = initialState.Details,
       return Object.assign({}, state, action.payload.projdetail, {currentproj: currentproj}, commitSuccessFlag)
 
     case types.GET_GIT_LOG_SUCCESS:
-      let logdata = action.response;
+      let logdata = action.response.FullLog;
       console.log("Show me git log response");
-      console.log(action.response);
+      //console.log(logdata);
 
-      return logdata;
+      return Object.assign({}, state, { logdata: logdata })
 
     case types.COMMIT_CHANGE_SUCCESS:
       console.log("In projDetailReducer");
