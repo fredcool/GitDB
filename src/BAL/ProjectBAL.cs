@@ -112,7 +112,7 @@ namespace BAL
             string projectPath = ProjectBasePath + request.ProjectName;
             Repository repo = new Repository(projectPath);
             string commitMessage = !string.IsNullOrWhiteSpace(request.CommitMessage) ? request.CommitMessage + "\n" : "";
-            //string content = "";
+            string content = "";
 
             // Get connection string from Project's _Db.config file
             ProjectDomain projectDomain = ProjectDomainHelper.ToProjectDomain(File.ReadAllText(projectPath + "\\_Db.config"));
@@ -120,7 +120,7 @@ namespace BAL
             foreach (CommitItemDomain commitItem in request.CommitItems)
             {
                 string itemPath = projectPath + "\\" + commitItem.ItemType + "_" + commitItem.Name + ".txt";
-                string content = commitItem.CurrentDefinition;
+                content = commitItem.CurrentDefinition;
                 this.logDAL.InsertLog(commitItem.Name);
                 // If the ItemType is table, get the schema script
                 if (commitItem.ItemType == CommitItemDomain.ItemType_Table)
@@ -186,13 +186,13 @@ namespace BAL
             {
                 repo.Commit(commitMessage, author, committer);
 
-                /*UserDAL userDAL = new UserDAL();
+                UserDAL userDAL = new UserDAL();
                 List<User> users = userDAL.GetAllUsers();
                 
                 foreach (User user in users)
                 {
                     Common.SendEmail(user.Username, request.ProjectName + " has new commit!", content);
-                }*/
+                }
             }
             catch(Exception ex)
             {
