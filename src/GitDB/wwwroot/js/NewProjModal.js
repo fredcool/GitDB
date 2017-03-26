@@ -1,5 +1,5 @@
 import React from 'react';
-import { Popover, Tooltip, Button, Modal, OverlayTrigger,
+import { Popover, Tooltip, Button, Modal,
          Form, FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
 import * as projActions from './actions/projActions';
@@ -152,7 +152,6 @@ class NewProjModal extends React.Component {
               <br/>
             </Form>
 
-
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.save}>Create</Button>
@@ -190,4 +189,4 @@ NewProjModal.defaultProps = {
   dbname: ""
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewProjModal);
+export default connect(null, mapDispatchToProps)(NewProjModal);

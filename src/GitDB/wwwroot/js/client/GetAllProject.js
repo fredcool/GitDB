@@ -14,10 +14,12 @@ export default {
 
   getProjectDetail: function(projname) {
     let url = "http://34.208.160.108/WebService/Project/ListItemsByProject?ProjectName=" + projname;
-    console.log(url);
+    //console.log(url);
 
     return axios.post(url)
       .then(response => {
+        console.log("API call got response!");
+        console.log(response.data);
         return response.data;
       }).catch(error => {
         return error;
@@ -47,7 +49,7 @@ export default {
     let moreparam = "&CommitMessage=" + data.commitmsg 
                     + "&ItemType=" + data.itemtype
                     + "&Name=" + data.itemname + "&CurrentDefinition="
-                    + data.changedscript ;
+                    + data.workingcopy ;
 
     let url = baseurl + moreparam;
 
@@ -58,6 +60,22 @@ export default {
         console.log(error.message);
         return error;
       });
+  },
+
+  getGitLog: function(data) {
+    let url = "http://34.208.160.108/WebService/Project/ProjectLog?ProjectName=" + data.projname;
+
+    return axios.post(url)
+      .then(response => {
+        console.log("get git log - after post request sent");
+        console.log(response.data);
+        return response.data;
+      }).catch(error => {
+        console.log(error.message);
+        return error;
+      });
   }
+
+
 
 }
