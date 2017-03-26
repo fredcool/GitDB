@@ -108,7 +108,7 @@ class ProjDetail extends React.Component {
   }
 
   getGitLog() {
-    let requestdata = { projname: this.state.currentproj };
+    let requestdata = { projname: this.state.currentProj };
     console.log("Show Project Name");
     console.log(requestdata);
     this.props.actions.getGitLog(requestdata);
