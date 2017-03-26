@@ -304,7 +304,7 @@ namespace BAL
                     foreach (DbObject storedProcedure in storedProcedures)
                     {
                         CommitItemDomain item = new CommitItemDomain();
-                        item.ItemType = CommitItemDomain.ItemType_Function;
+                        item.ItemType = CommitItemDomain.ItemType_Stored_Procedure;
                         item.Name = storedProcedure.Name;
                         item.CurrentDefinition = storedProcedure.Definition;
                         response.StoredProcedureItems.Add(item);

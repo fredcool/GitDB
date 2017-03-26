@@ -85,6 +85,16 @@ namespace UnitTest.BAL
         }
 
         [TestMethod]
+        public void TestListItemsByProject_Order()
+        {
+            ListItemsByProjectRequest request = new ListItemsByProjectRequest();
+            request.ProjectName = "Order";
+            ListItemsByProjectResponse response = bal.ListItemsByProject(request);
+
+            Assert.AreEqual(StatusCodes.Status_Success, response.StatusCode);
+        }
+
+        [TestMethod]
         public void TestProjectLog()
         {
             ProjectLogRequest request = new ProjectLogRequest();
