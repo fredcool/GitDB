@@ -95,15 +95,15 @@ class ProjDetail extends React.Component {
     console.log("[Component Will Receive Props]");
     console.log(nextProps);
 
-    if(nextProps.commitSuccess){
-      this.props.actions.loadProjectDetail(this.props.currentProj);
-    }
+
     //Have to set State here to reflect the change by mapStateToProps()
     this.setState({tableItems: nextProps.tableItems,
                    spItems: nextProps.spItems,
                    funcItems: nextProps.funcItems,
                    currentProj: nextProps.currentProj,
-                   commitSuccess: false });
+                   commitSuccess: nextProps.commitSuccess,
+                   scriptdata: nextProps.scriptdata,
+                   commitmsg: '' });
   }
 
   getGitLog() {
@@ -113,8 +113,11 @@ class ProjDetail extends React.Component {
     this.props.actions.getGitLog(requestdata);
   }
 
-  componentDidMount() {
-
+  componentDidUpdate(prevProps, prevState){
+    console.log("See componentDidUpdate");
+    if(this.state.commitSuccess){
+      this.props.actions.loadProjectDetail(this.state.currentProj);
+    }
   }
 
   render() {

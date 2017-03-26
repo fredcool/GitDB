@@ -9,11 +9,12 @@ export default function projDetailReducer(state = initialState.Details,
       console.log("In projDetailReducer");
       console.log(state);
       let currentproj = action.payload.currentproj;
+      let commitSuccessFlag = { commitSuccess: false };
       //newState.currentproj = action.currentproj; //insert current project name for sending it as props to Project Detail page
       console.log(currentproj);
       //console.log(action.currentproj)
 
-      return Object.assign({}, state, action.payload.projdetail, {currentproj: currentproj})
+      return Object.assign({}, state, action.payload.projdetail, {currentproj: currentproj}, commitSuccessFlag)
 
     case types.GET_GIT_LOG_SUCCESS:
       let logdata = action.response;
