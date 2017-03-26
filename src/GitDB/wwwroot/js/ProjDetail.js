@@ -15,7 +15,7 @@ class ProjDetail extends React.Component {
       tableItems: this.props.tableItems,
       spItems: this.props.spItems,
       funcItems: this.props.funcItems,
-      scriptdata: this.props.scriptdata, //{working copy} and {committed file} to show 
+      scriptdata: this.props.scriptdata, //{working copy} and {committed file} and {diff}
       currentProj: this.props.currentProj,
       currentItemName: '',
       currentItemType: '',
@@ -37,10 +37,12 @@ class ProjDetail extends React.Component {
     //Already got the table, sp, func details in this.state; don't need to call API again
     switch(type) {
       case "tables":
+        console.log(this.state.tableItems);
         this.state.tableItems.forEach(item => {
           if(item.Name === itemName) {
             let scriptObj = { workingcopy: item.CurrentDefinition,
-                              committedfile: item.CommittedDefinition };
+                              committedfile: item.CommittedDefinition,
+                              diff: item.Diff };
             this.setState({ scriptdata: scriptObj,
                             currentItemName: itemName,
                             currentItemType: "TABLE" });
@@ -51,7 +53,8 @@ class ProjDetail extends React.Component {
         this.state.spItems.forEach(item => {
           if(item.Name === itemName) {
             let scriptObj = { workingcopy: item.CurrentDefinition,
-                              committedfile: item.CommittedDefinition };
+                              committedfile: item.CommittedDefinition,
+                              diff: item.Diff };
             this.setState({ scriptdata: scriptObj,
                             currentItemName: itemName,
                             currentItemType: "SP"  });
@@ -62,7 +65,8 @@ class ProjDetail extends React.Component {
         this.state.funcItems.forEach(item => {
           if(item.Name === itemName) {
             let scriptObj = { workingcopy: item.CurrentDefinition,
-                              committedfile: item.CommittedDefinition };
+                              committedfile: item.CommittedDefinition,
+                              diff: item.Diff };
             this.setState({ scriptdata: scriptObj,
                             currentItemName: itemName,
                             currentItemType: "FUNCTION"  });
@@ -149,6 +153,9 @@ class ProjDetail extends React.Component {
                            onChange={this.handleChange} />
             </FormGroup>
             <pre>{this.state.scriptdata.workingcopy}</pre>
+            <br />
+            <h3><Label>Diff</Label></h3>
+            <pre>{this.state.scriptdata.diff}</pre>
           </Col>
 
           <Col lg={4}>
@@ -198,7 +205,7 @@ ProjDetail.defaultProps = {
   tableItems: [],
   spItems:[],
   funcItems:[],
-  scriptdata: {workingcopy: "", committedfile: ""},
+  scriptdata: {workingcopy: "", committedfile: "", diff:""},
   currentProj: "",
   commitSuccess: false,
   logdata: ""
