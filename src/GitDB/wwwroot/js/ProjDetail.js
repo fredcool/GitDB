@@ -3,6 +3,7 @@ import { Grid, Row, Col, FormGroup,
          FormControl, ControlLabel,
          Button, ButtonToolbar, Label } from 'react-bootstrap';
 import ProjDetailObjTables from './ProjDetailObjTables';
+import GitLogModal from './GitLogModal';
 import {bindActionCreators} from 'redux';
 import * as projActions from './actions/projActions';
 import {connect} from 'react-redux';
@@ -14,21 +15,25 @@ class ProjDetail extends React.Component {
       tableItems: this.props.tableItems,
       spItems: this.props.spItems,
       funcItems: this.props.funcItems,
-      scriptdata: this.props.scriptdata,
+      scriptdata: this.props.scriptdata, //{working copy} and {committed file} to show 
       currentProj: this.props.currentProj,
-      changedscript: '',
       currentItemName: '',
       currentItemType: '',
+      commitmsg:'',
+      commitSuccess: false
     };
     this.handleClick = this.handleClick.bind(this);
     this.commitChange = this.commitChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.getGitLog = this.getGitLog.bind(this);
   }
 
+  //When user clicks an item in DB Items
   handleClick(itemName, type) {
     console.log("Click in ProjDetail");
     console.log(itemName);
     console.log(type);
+    //Already got the table, sp, func details in this.state; don't need to call API again
     switch(type) {
       case "tables":
         this.state.tableItems.forEach(item => {
@@ -68,17 +73,18 @@ class ProjDetail extends React.Component {
     }
   }
 
+  //When user type commit message in textarea, record every change
   handleChange(event) {
-    this.setState({changedscript: event.target.value});
+    this.setState({commitmsg: event.target.value});
   }
 
-  //TO DO: get project name
   commitChange() {
     let requestdata = { projname: this.state.currentProj,
-                        commitmsg: 'Default',
+                        commitmsg: this.state.commitmsg,
                         itemtype: this.state.currentItemType,
                         itemname: this.state.currentItemName,
-                        changedscript: this.state.changedscript };
+                        workingcopy: this.state.scriptdata.workingcopy };
+    console.log("Commit the current data: ");
     console.log(requestdata);
 
     //BUG: projname
@@ -89,25 +95,42 @@ class ProjDetail extends React.Component {
     console.log("[Component Will Receive Props]");
     console.log(nextProps);
 
+
+    //Have to set State here to reflect the change by mapStateToProps()
     this.setState({tableItems: nextProps.tableItems,
                    spItems: nextProps.spItems,
-                   funcItems: nextProps.funcItems});
+                   funcItems: nextProps.funcItems,
+                   currentProj: nextProps.currentProj,
+                   commitSuccess: nextProps.commitSuccess,
+                   scriptdata: nextProps.scriptdata,
+                   commitmsg: '' });
   }
 
-  componentDidMount() {
+  getGitLog() {
+    let requestdata = { projname: this.state.currentproj };
+    console.log("Show Project Name");
+    console.log(this.props.currentproj);
+    this.props.actions.getGitLog(requestdata);
+  }
 
+  componentDidUpdate(prevProps, prevState){
+    console.log("See componentDidUpdate");
+    if(this.state.commitSuccess){
+      this.props.actions.loadProjectDetail(this.state.currentProj);
+    }
   }
 
   render() {
     console.log("About to render");
-    console.log(this.state.scriptdata);
+    //console.log(this.state.scriptdata);
 
     return (
       <Grid>
         <Row className="show-grid">
           <ButtonToolbar>
             <Button bsStyle="info" onClick={this.commitChange}>Commit Change</Button>
-            <Button bsStyle="info">Git Log</Button>
+            <span>  </span>
+            <GitLogModal handleClick={this.getGitLog} />
           </ButtonToolbar>
         </Row>
         <Row className="show-grid">
@@ -120,8 +143,8 @@ class ProjDetail extends React.Component {
             <FormGroup controlId="formControlsTextarea">
               <FormControl componentClass="textarea"
                            placeholder="Please edit your script here before commit."
-                           rows="5"
-                           value={this.state.changedscript}
+                           rows="4"
+                           value={this.state.commitmsg}
                            onChange={this.handleChange} />
             </FormGroup>
             <pre>{this.state.scriptdata.workingcopy}</pre>
@@ -144,19 +167,24 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   console.log("Maping State For ProjDetail");
   console.log(state);
+  console.log("Own Props");
+  //console.log(ownProps);
   const tableItems = Object.assign([], state.projdetail.TableItems)
   const spItems = Object.assign([], state.projdetail.StoredProcedureItems)
   const funcItems = Object.assign([], state.projdetail.FunctionItems)
   const projName = state.projdetail.currentproj;
+  const commitSuccess = state.projdetail.commitSuccess;
 
   return {
     tableItems: tableItems,
     spItems: spItems,
     funcItems: funcItems,
-    currentProj: projName
+    currentProj: projName,
+    commitSuccess: commitSuccess
+
   }
 }
 
@@ -169,7 +197,8 @@ ProjDetail.defaultProps = {
   spItems:[],
   funcItems:[],
   scriptdata: {workingcopy: "", committedfile: ""},
-  currentProj: ""
+  currentProj: "",
+  commitSuccess: false
 };
 
 

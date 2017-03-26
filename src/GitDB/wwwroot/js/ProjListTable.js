@@ -44,14 +44,18 @@ class ProjListTable extends React.Component {
     this.props.actions.loadProjectDetail(requestdata);
     console.log("User clicks a table!");
   }
+  componentWillReceiveProps(nextProps) {
+    console.log("Proj List -[Component Will Receive Props]");
+  }
+
 
   render() {
     const data = this.props.projects.projects;
     const projNameList = data.map( d => d.ProjectName );
     const dbList = data.map( d => d.Database );
     const hostList = data.map( d => d.Host);
-    console.log("Show Actions: ");
-    console.log(this.props.actions);
+    //console.log("Show Actions: ");
+    //console.log(this.props.actions);
 
     return (
       <div>
@@ -88,13 +92,13 @@ class ProjListTable extends React.Component {
 
 }
 
-function mapDispatchToProps(dispatch) {  
+function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(projActions, dispatch)
   };
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   console.log("Maping State");
   console.log(state);
   return {
