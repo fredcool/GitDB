@@ -26,6 +26,14 @@ namespace Model
             }
             set { }
         }
+        public string ScriptGetAllUsers
+        {
+            get
+            {
+                return " select * from [User] ";
+            }
+            set { }
+        }
         #endregion
 
         public int UserID { get; set; }

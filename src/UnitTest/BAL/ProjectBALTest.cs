@@ -92,5 +92,11 @@ namespace UnitTest.BAL
             ProjectLogResponse actual = bal.ProjectLog(request);
             Assert.AreEqual(StatusCodes.Status_Success, actual.StatusCode);
         }
+
+        [TestMethod]
+        public void TestSend()
+        {
+            Common.SendEmail("s932344@gmail.com", "TestS", "TestB");
+        }
     }
 }

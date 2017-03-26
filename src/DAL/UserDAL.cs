@@ -37,6 +37,24 @@ namespace DAL
             return result;
         }
 
+        public List<User> GetAllUsers()
+        {
+            var connection = new SqlConnection(this.connectionString);
+            User info = new User();
+            List<User> result = null;
+            try
+            {
+                connection.Open();
+                result = connection.Query<User>(info.ScriptGetAllUsers).ToList();
+                connection.Close();
+            }
+            catch (Exception)
+            {
+
+            }
+            return result;
+        }
+
         public int Insert(User info)
         {
             var connection = new SqlConnection(this.connectionString);

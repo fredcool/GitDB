@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace BAL
 {
@@ -111,6 +112,7 @@ namespace BAL
             string projectPath = ProjectBasePath + request.ProjectName;
             Repository repo = new Repository(projectPath);
             string commitMessage = !string.IsNullOrWhiteSpace(request.CommitMessage) ? request.CommitMessage + "\n" : "";
+            //string content = "";
 
             // Get connection string from Project's _Db.config file
             ProjectDomain projectDomain = ProjectDomainHelper.ToProjectDomain(File.ReadAllText(projectPath + "\\_Db.config"));
@@ -183,6 +185,14 @@ namespace BAL
             try
             {
                 repo.Commit(commitMessage, author, committer);
+
+                /*UserDAL userDAL = new UserDAL();
+                List<User> users = userDAL.GetAllUsers();
+                
+                foreach (User user in users)
+                {
+                    Common.SendEmail(user.Username, request.ProjectName + " has new commit!", content);
+                }*/
             }
             catch(Exception ex)
             {
