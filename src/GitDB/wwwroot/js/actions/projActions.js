@@ -5,7 +5,7 @@ import projApi from '../client/GetAllProject';
 export function loadProjectsSuccess(projs) {
   console.log("Load Success!");
   console.log(projs); // array of all projects
-  return {type: types.LOAD_PROJS_SUCCESS, projs};
+  return {type: types.LOAD_PROJS_SUCCESS, payload: projs};
 }
 
 export function loadProjectDetailSuccess(details, currentproj) {
@@ -20,7 +20,7 @@ export function loadProjectDetailSuccess(details, currentproj) {
 export function createProjectSuccess(response) {
   console.log("Create Project Success!");
   console.log(response);
-  return {type: types.CREATE_PROJ_SUCCESS, response};
+  return {type: types.CREATE_PROJ_SUCCESS, payload: response};
 }
 
 export function commitChangeSuccess(response) {
