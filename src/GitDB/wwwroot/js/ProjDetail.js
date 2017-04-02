@@ -4,6 +4,7 @@ import { Grid, Row, Col, FormGroup,
          Button, ButtonToolbar, Label } from 'react-bootstrap';
 import ProjDetailObjTables from './ProjDetailObjTables';
 import GitLogModal from './GitLogModal';
+import CommitTextArea from './CommitTextArea';
 import {bindActionCreators} from 'redux';
 import * as projActions from './actions/projActions';
 import {connect} from 'react-redux';
@@ -145,13 +146,7 @@ class ProjDetail extends React.Component {
 
           <Col lg={4}>
             <h3><Label>Working Copy</Label></h3>
-            <FormGroup controlId="formControlsTextarea">
-              <FormControl componentClass="textarea"
-                           placeholder="Please edit your script here before commit."
-                           rows="4"
-                           value={this.state.commitmsg}
-                           onChange={this.handleChange} />
-            </FormGroup>
+            <CommitTextArea commitmsg={this.state.commitmsg} handleChange={this.handleChange} />
             <pre>{this.state.scriptdata.workingcopy}</pre>
             <br />
             <h3><Label>Diff</Label></h3>

@@ -18,14 +18,17 @@ export default class ProjDetailObjTables extends React.Component {
 
   }
 
+  getTableItemNameList(itemObj){
+    return itemObj.map( item => item.Name )
+  }
+
   render() {
-    //var {dataList} = this.state;
     const tableItems = this.props.data.tableItems;
-    const tableNameList = tableItems.map( item => item.Name )
+    const tableNameList = this.getTableItemNameList(tableItems);
     const spItems = this.props.data.spItems;
-    const spNameList = spItems.map( item => item.Name )
+    const spNameList = this.getTableItemNameList(spItems);
     const funcItems = this.props.data.funcItems;
-    const funcNameList = funcItems.map( item => item.Name )
+    const funcNameList = this.getTableItemNameList(funcItems);
 
     //console.log(tableNameList);
 
