@@ -10,7 +10,12 @@ class NewProjModal extends React.Component {
   constructor() {
     super();
     this.state = {
-      showModal: false
+      showModal: false,
+      projname: '',
+      host: '',
+      username: '',
+      password: '',
+      dbname: ''
     };
 
     this.open = this.open.bind(this);
@@ -167,14 +172,6 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(projActions, dispatch)
   };
-}
-
-function mapStateToProps(state, ownProps) {
-  console.log("Maping State In NewProjModal");
-  console.log(state);
-  return {
-    projects: state
-  }
 }
 
 NewProjModal.propTypes = {

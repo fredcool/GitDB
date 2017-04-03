@@ -4,6 +4,7 @@ import { Grid, Row, Col, FormGroup,
          Button, ButtonToolbar, Label } from 'react-bootstrap';
 import ProjDetailObjTables from './ProjDetailObjTables';
 import GitLogModal from './GitLogModal';
+import CommitTextArea from './CommitTextArea';
 import {bindActionCreators} from 'redux';
 import * as projActions from './actions/projActions';
 import {connect} from 'react-redux';
@@ -25,8 +26,22 @@ class ProjDetail extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.commitChange = this.commitChange.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleCommitMsgInput = this.handleCommitMsgInput.bind(this);
     this.getGitLog = this.getGitLog.bind(this);
+  }
+
+  getCurrentDBItem(itemsArray, itemName, type){
+    itemsArray.forEach(item => {
+      console.log("checking");
+      if(item.Name === itemName) {
+        let scriptObj = { workingcopy: item.CurrentDefinition,
+                          committedfile: item.CommittedDefinition,
+                          diff: item.Diff };
+        this.setState({ scriptdata: scriptObj,
+                        currentItemName: itemName,
+                        currentItemType: type });
+      }
+    });
   }
 
   //When user clicks an item in DB Items
@@ -37,49 +52,20 @@ class ProjDetail extends React.Component {
     //Already got the table, sp, func details in this.state; don't need to call API again
     switch(type) {
       case "tables":
-        console.log(this.state.tableItems);
-        this.state.tableItems.forEach(item => {
-          if(item.Name === itemName) {
-            let scriptObj = { workingcopy: item.CurrentDefinition,
-                              committedfile: item.CommittedDefinition,
-                              diff: item.Diff };
-            this.setState({ scriptdata: scriptObj,
-                            currentItemName: itemName,
-                            currentItemType: "TABLE" });
-          }
-        });
-            break;
+        this.getCurrentDBItem(this.state.tableItems, itemName, "TABLE");
+        break;
       case "sp":
-        this.state.spItems.forEach(item => {
-          if(item.Name === itemName) {
-            let scriptObj = { workingcopy: item.CurrentDefinition,
-                              committedfile: item.CommittedDefinition,
-                              diff: item.Diff };
-            this.setState({ scriptdata: scriptObj,
-                            currentItemName: itemName,
-                            currentItemType: "SP"  });
-          }
-        });
-            break;
+        this.getCurrentDBItem(this.state.spItems, itemName, "SP");
+        break;
       case "func":
-        this.state.funcItems.forEach(item => {
-          if(item.Name === itemName) {
-            let scriptObj = { workingcopy: item.CurrentDefinition,
-                              committedfile: item.CommittedDefinition,
-                              diff: item.Diff };
-            this.setState({ scriptdata: scriptObj,
-                            currentItemName: itemName,
-                            currentItemType: "FUNCTION"  });
-          }
-        });
-            break;
+        this.getCurrentDBItem(this.state.funcItems, itemName, "FUNCTION");
+        break;
       default:
         console.log("Sorry No Data");
     }
   }
 
-  //When user type commit message in textarea, record every change
-  handleChange(event) {
+  handleCommitMsgInput(event) {
     this.setState({commitmsg: event.target.value});
   }
 
@@ -127,7 +113,7 @@ class ProjDetail extends React.Component {
 
   render() {
     console.log("About to render");
-    //console.log(this.state.scriptdata);
+    console.log(this.state);
 
     return (
       <Grid>
@@ -145,13 +131,7 @@ class ProjDetail extends React.Component {
 
           <Col lg={4}>
             <h3><Label>Working Copy</Label></h3>
-            <FormGroup controlId="formControlsTextarea">
-              <FormControl componentClass="textarea"
-                           placeholder="Please edit your script here before commit."
-                           rows="4"
-                           value={this.state.commitmsg}
-                           onChange={this.handleChange} />
-            </FormGroup>
+            <CommitTextArea commitmsg={this.state.commitmsg} handleChange={this.handleCommitMsgInput} />
             <pre>{this.state.scriptdata.workingcopy}</pre>
             <br />
             <h3><Label>Diff</Label></h3>
