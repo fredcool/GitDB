@@ -2,8 +2,8 @@ import React, {PropTypes} from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
 export default class GitLogModal extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       showModal: false
     };
