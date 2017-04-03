@@ -26,7 +26,7 @@ class ProjDetail extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.commitChange = this.commitChange.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleCommitMsgInput = this.handleCommitMsgInput.bind(this);
     this.getGitLog = this.getGitLog.bind(this);
   }
 
@@ -65,8 +65,7 @@ class ProjDetail extends React.Component {
     }
   }
 
-  //When user type commit message in textarea, record every change
-  handleChange(event) {
+  handleCommitMsgInput(event) {
     this.setState({commitmsg: event.target.value});
   }
 
@@ -132,7 +131,7 @@ class ProjDetail extends React.Component {
 
           <Col lg={4}>
             <h3><Label>Working Copy</Label></h3>
-            <CommitTextArea commitmsg={this.state.commitmsg} handleChange={this.handleChange} />
+            <CommitTextArea commitmsg={this.state.commitmsg} handleChange={this.handleCommitMsgInput} />
             <pre>{this.state.scriptdata.workingcopy}</pre>
             <br />
             <h3><Label>Diff</Label></h3>
